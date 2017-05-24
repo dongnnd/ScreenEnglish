@@ -1,0 +1,92 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.dongnd.screenenglish.LockScreenActivity">
+    <ImageView
+        android:id="@+id/background"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="fitXY" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:id="@+id/layout_singal"
+            android:layout_marginTop="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:orientation="horizontal"
+            android:layout_alignParentLeft="true">
+            <ImageView
+                android:id="@+id/ls_singal_1"
+                android:layout_width="8dp"
+                android:layout_height="8dp"
+                />
+
+            <ImageView
+                android:id="@+id/ls_singal_2"
+                android:layout_width="8dp"
+                android:layout_height="8dp" />
+            <ImageView
+                android:id="@+id/ls_singal_3"
+                android:layout_width="8dp"
+                android:layout_height="8dp" />
+            <ImageView
+                android:id="@+id/ls_singal_4"
+                android:layout_width="8dp"
+                android:layout_height="8dp" />
+            <ImageView
+                android:id="@+id/ls_singal_5"
+                android:layout_width="8dp"
+                android:layout_height="8dp" />
+
+        </LinearLayout>
+        <TextView
+            android:id="@+id/ls_singal_text"
+            android:layout_toRightOf="@+id/layout_singal"
+            android:layout_marginLeft="3dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#ffffff"/>
+
+        <ImageView
+            android:id="@+id/ls_battery_img"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="5dp"
+            android:layout_width="35dp"
+            android:layout_height="11dp"
+           />
+        <TextView
+            android:id="@+id/ls_battery_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:textSize="12sp"
+            android:textColor="#ffffff"
+            android:layout_toLeftOf="@+id/ls_battery_img"/>
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/pager"
+            android:layout_below="@+id/layout_singal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"></android.support.v4.view.ViewPager>
+    </RelativeLayout>
+    <adapter.MultiDirectionSlidingDrawer
+        xmlns:my="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/drawer"
+        my:direction="topToBottom"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        my:handle="@+id/handle"
+        my:content="@+id/content">
+        <include
+            android:id="@id/content"
+            layout="@layout/english_explain" />
+        <ImageView
+            android:id="@id/handle"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"/>
+    </adapter.MultiDirectionSlidingDrawer>
+</RelativeLayout>

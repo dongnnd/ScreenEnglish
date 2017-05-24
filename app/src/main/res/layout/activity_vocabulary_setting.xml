@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.dongnd.screenenglish.VocabularySetting">
+
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        app:popupTheme="@style/AppTheme.PopupOverlay">
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Vocabulary Setting"
+            android:textColor="#111111"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+
+    </android.support.v7.widget.Toolbar>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/toolbar"
+        android:background="#E5E6EB">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:id="@+id/vcst_rl_01"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:background="@drawable/setting_background">
+
+                <TextView
+                    android:id="@+id/vcst_subject_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="15dp"
+                    android:textSize="18sp"
+                    android:layout_marginTop="5.0dip"
+                    android:text="Chủ đề từ vựng"
+                    android:textStyle="bold" />
+
+                <ImageView
+                    android:id="@+id/vcst_subject_img"
+                    android:layout_width="50dp"
+                    android:layout_height="30dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginTop="15dp"
+                    android:src="@drawable/turn_right"
+                    android:textStyle="bold" />
+
+                <View
+                    android:id="@+id/vcst_line_01"
+                    android:layout_width="fill_parent"
+                    android:layout_height="0.5dip"
+                    android:layout_below="@+id/vcst_subject_title"
+                    android:layout_marginLeft="10.0dip"
+                    android:layout_marginRight="10.0dip"
+                    android:layout_marginTop="10.0dip"
+                    android:background="@color/sperated_line" />
+
+
+                <TextView
+                    android:id="@+id/vcst_subject_curent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/vcst_line_01"
+                    android:layout_margin="15dp"
+                    android:layout_marginTop="5.0dip"
+                    android:text="Chủ đề hiện tại:"
+                    android:textColor="#1D7FFB"
+                    android:textStyle="italic" />
+
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:id="@+id/vcst_rl_02"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:background="@drawable/setting_background">
+
+                <TextView
+                    android:id="@+id/vcst_pa_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="15dp"
+                    android:text="Phiên âm"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+                <View
+                    android:id="@+id/vcst_line_02"
+                    android:layout_width="fill_parent"
+                    android:layout_height="0.5dip"
+                    android:layout_below="@+id/vcst_pa_title"
+                    android:layout_marginLeft="10.0dip"
+                    android:layout_marginRight="10.0dip"
+                    android:layout_marginTop="10.0dip"
+                    android:background="@color/sperated_line" />
+                <RadioGroup
+                    android:id="@+id/vcst_radio_phienam"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/vcst_line_02"
+                    android:orientation="horizontal"
+                    android:layout_margin="15dp">
+
+                    <RadioButton
+                        android:id="@+id/vcst_rd_aa"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:enabled="true"
+                        android:text="Anh-Anh" />
+
+                    <RadioButton
+                        android:id="@+id/vcst_rd_am"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Anh-Mỹ" />
+                </RadioGroup>
+
+            </RelativeLayout>
+
+
+
+            <RelativeLayout
+                android:id="@+id/vcst_rl_03"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:background="@drawable/setting_background">
+
+                <TextView
+                    android:id="@+id/vcst_lap_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5.0dip"
+                    android:text="Kiểm soát lặp"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:layout_margin="15dp"/>
+                <View
+                    android:id="@+id/vcst_line_03"
+                    android:layout_width="fill_parent"
+                    android:layout_height="0.5dip"
+                    android:layout_below="@+id/vcst_lap_title"
+                    android:layout_marginLeft="10.0dip"
+                    android:layout_marginRight="10.0dip"
+                    android:layout_marginTop="10.0dip"
+                    android:background="@color/sperated_line" />
+
+
+                <RadioGroup
+                    android:id="@+id/vcst_radio_lap"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/vcst_line_03"
+                    android:orientation="vertical"
+                    android:layout_margin="15dp">
+
+                    <RadioButton
+                        android:id="@+id/vcst_rd_lap1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:enabled="true"
+                        android:text="Lặp ngẫu nghiên trong chủ đề được chọn" />
+
+                    <RadioButton
+                        android:id="@+id/vcst_rd_lap2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Lặp tuần tự, các từ chọn sai sẽ được lặp lại" />
+                </RadioGroup>
+            </RelativeLayout>
+
+
+        </LinearLayout>
+    </RelativeLayout>
+
+</RelativeLayout>

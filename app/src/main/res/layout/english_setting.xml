@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+    <TextView
+        android:id="@+id/setting_top"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/setting_top"
+        android:layout_margin="5dp"
+        android:background="@drawable/shape">
+
+        <ImageView
+            android:id="@+id/setting_img_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/ic_arrow"/>
+
+        <LinearLayout
+            android:id="@+id/setting_linear1"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:orientation="horizontal"
+            android:layout_below="@+id/setting_img_title"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp">
+
+            <ImageView
+                android:id="@+id/setting_wifi"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+
+                android:src="@drawable/ic_wifi_normal"/>
+            <ImageView
+                android:id="@+id/setting_bluetooth"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_margin="10dp"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_bluetooth_normal"/>
+            <ImageView
+                android:id="@+id/setting_brightless"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_margin="10dp"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_brightless_normal"/>
+            <ImageView
+                android:id="@+id/setting_orientation"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_margin="10dp"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_orientation_normal"/>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/setting_line1"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#111111"
+            android:layout_below="@+id/setting_linear1"/>
+
+        <LinearLayout
+
+            android:id="@+id/setting_linear2"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_below="@+id/setting_line1"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="10dp">
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_brightness_sub"/>
+                <SeekBar
+                    android:id="@+id/setting_light"
+                    android:layout_width="0dp"
+                    android:layout_weight="5"
+                    android:max="255"
+                    android:layout_height="wrap_content" />
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_brightness_plus"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="10dp">
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_sound_sub"/>
+                <SeekBar
+                    android:layout_width="0dp"
+                    android:layout_weight="5"
+                    android:layout_height="wrap_content" />
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_sound_plus"/>
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/setting_line2"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="10dp"
+            android:background="#111111"
+            android:layout_below="@+id/setting_linear2"/>
+
+        <LinearLayout
+            android:id="@+id/setting_linear3"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:orientation="horizontal"
+            android:layout_below="@+id/setting_line2"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp">
+
+            <ImageView
+                android:id="@+id/setting_flash"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+
+                android:src="@drawable/ic_slide_flash_normal"/>
+            <ImageView
+                android:id="@+id/setting_time"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_margin="10dp"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_slide_timer_normal"/>
+            <ImageView
+                android:id="@+id/setting_calculator"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_margin="10dp"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_slide_calculator_normal"/>
+            <ImageView
+                android:id="@+id/setting_camera"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_margin="10dp"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_slide_camera_normal"/>
+        </LinearLayout>
+
+    </RelativeLayout>
+</RelativeLayout>

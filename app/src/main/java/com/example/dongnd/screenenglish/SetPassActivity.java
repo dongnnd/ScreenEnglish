@@ -1,0 +1,273 @@
+package com.example.dongnd.screenenglish;
+
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.view.WindowManager;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class SetPassActivity extends AppCompatActivity implements View.OnClickListener{
+
+    public TextView ps_title;
+
+    public ImageView ps_background;
+
+    public ImageView ps_pass1, ps_pass2, ps_pass3, ps_pass4;
+
+    public ImageView ps_0, ps_1, ps_2, ps_3, ps_4, ps_5,
+                        ps_6, ps_7, ps_8, ps_9;
+
+    public TextView ps_cancel, ps_del;
+
+    public ArrayList<Integer> userpass=new ArrayList<>();
+
+    public SharedPreferences sharedPreferences;
+
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.pass_screen);
+
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
+        sharedPreferences=getSharedPreferences("data", MODE_PRIVATE);
+
+        initSetpass();
+
+
+
+
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+    }
+
+    public void initSetpass(){
+        ps_title=(TextView)findViewById(R.id.ps_title);
+        ps_title.setText("Đặt mật khẩu");
+
+        ps_background=(ImageView)findViewById(R.id.ps_background);
+        ps_background.setImageResource(sharedPreferences.getInt("background", R.drawable.a28));
+
+        ps_pass1=(ImageView)findViewById(R.id.ps_pass1);
+        ps_pass1.setOnClickListener(this);
+        ps_pass2=(ImageView)findViewById(R.id.ps_pass2);
+        ps_pass2.setOnClickListener(this);
+        ps_pass3=(ImageView)findViewById(R.id.ps_pass3);
+        ps_pass3.setOnClickListener(this);
+        ps_pass4=(ImageView)findViewById(R.id.ps_pass4);
+        ps_pass4.setOnClickListener(this);
+
+        ps_0=(ImageView)findViewById(R.id.ps_0);
+        ps_0.setOnClickListener(this);
+        ps_1=(ImageView)findViewById(R.id.ps_1);
+        ps_1.setOnClickListener(this);
+        ps_2=(ImageView)findViewById(R.id.ps_2);
+        ps_2.setOnClickListener(this);
+        ps_3=(ImageView)findViewById(R.id.ps_3);
+        ps_3.setOnClickListener(this);
+        ps_4=(ImageView)findViewById(R.id.ps_4);
+        ps_4.setOnClickListener(this);
+        ps_5=(ImageView)findViewById(R.id.ps_5);
+        ps_5.setOnClickListener(this);
+        ps_6=(ImageView)findViewById(R.id.ps_6);
+        ps_6.setOnClickListener(this);
+        ps_7=(ImageView)findViewById(R.id.ps_7);
+        ps_7.setOnClickListener(this);
+        ps_8=(ImageView)findViewById(R.id.ps_8);
+        ps_8.setOnClickListener(this);
+        ps_9=(ImageView)findViewById(R.id.ps_9);
+        ps_9.setOnClickListener(this);
+
+        ps_cancel=(TextView)findViewById(R.id.ps_cancel);
+        ps_cancel.setOnClickListener(this);
+        ps_del=(TextView)findViewById(R.id.ps_del);
+        ps_del.setOnClickListener(this);
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.ps_0:
+                userpass.add(0);
+                lenghPass();
+                break;
+            case R.id.ps_1:
+                userpass.add(1);
+                lenghPass();
+                break;
+            case R.id.ps_2:
+                userpass.add(2);
+                lenghPass();
+                break;
+            case R.id.ps_3:
+                userpass.add(3);
+                lenghPass();
+                break;
+            case R.id.ps_4:
+                userpass.add(4);
+                lenghPass();
+                break;
+            case R.id.ps_5:
+                userpass.add(5);
+                lenghPass();
+                break;
+            case R.id.ps_6:
+                userpass.add(6);
+                lenghPass();
+                break;
+            case R.id.ps_7:
+                userpass.add(7);
+                lenghPass();
+                break;
+            case R.id.ps_8:
+                userpass.add(8);
+                lenghPass();
+                break;
+
+            case R.id.ps_9:
+                userpass.add(9);
+                lenghPass();
+                break;
+            case R.id.ps_del:
+                deletePass();
+                lenghPass();
+                break;
+            case R.id.ps_cancel:
+                finish();
+        }
+    }
+
+    public void deletePass(){
+        if(userpass.size()>0){
+            userpass.remove(userpass.size()-1);
+        }
+    }
+
+    public void lenghPass(){
+        int size_pass=userpass.size();
+        switch (size_pass){
+            case 0:
+                ps_pass1.setImageResource(R.drawable.open_dot);
+                ps_pass2.setImageResource(R.drawable.open_dot);
+                ps_pass3.setImageResource(R.drawable.open_dot);
+                ps_pass4.setImageResource(R.drawable.open_dot);
+                break;
+            case 1:
+                ps_pass1.setImageResource(R.drawable.close_dot);
+                ps_pass2.setImageResource(R.drawable.open_dot);
+                ps_pass3.setImageResource(R.drawable.open_dot);
+                ps_pass4.setImageResource(R.drawable.open_dot);
+                break;
+            case 2:
+                ps_pass1.setImageResource(R.drawable.close_dot);
+                ps_pass2.setImageResource(R.drawable.close_dot);
+                ps_pass3.setImageResource(R.drawable.open_dot);
+                ps_pass4.setImageResource(R.drawable.open_dot);
+                break;
+            case 3:
+                ps_pass1.setImageResource(R.drawable.close_dot);
+                ps_pass2.setImageResource(R.drawable.close_dot);
+                ps_pass3.setImageResource(R.drawable.close_dot);
+                ps_pass4.setImageResource(R.drawable.open_dot);
+                break;
+            case 4:
+                ps_pass1.setImageResource(R.drawable.close_dot);
+                ps_pass2.setImageResource(R.drawable.close_dot);
+                ps_pass3.setImageResource(R.drawable.close_dot);
+                ps_pass4.setImageResource(R.drawable.close_dot);
+                passAgain();
+                break;
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(data==null){
+            finish();
+        }
+        if(requestCode==2){
+
+
+            Bundle bundle=data.getBundleExtra("ketqua");
+
+            ArrayList<Integer> list=bundle.getIntegerArrayList("pass_word");
+
+            if (list.size()!=0){
+                String password="";
+                if(checkCorrectPass(list, userpass)){
+
+                    for(int i=0;i<list.size();i++){
+                        password+=list.get(i);
+                    }
+
+                    SharedPreferences sharedPreferences=getSharedPreferences("data", MODE_PRIVATE);
+                    SharedPreferences.Editor editor=sharedPreferences.edit();
+                    editor.putString("password", password);
+                    editor.commit();
+                    sentResultSuccess();
+
+                }else{
+                    Toast.makeText(getApplicationContext(), "Mật khẩu không khớp, xin đặt lại!", Toast.LENGTH_LONG).show();
+                    sentResultError();
+                }
+            }else{
+                finish();
+            }
+        }
+    }
+
+    public void sentResultSuccess(){
+        Intent intent=getIntent();
+
+        Bundle bundle=new Bundle();
+        bundle.putBoolean("result",true);
+
+        intent.putExtra("result",bundle);
+        setResult(1, intent);
+        finish();
+
+    }
+
+
+    public void sentResultError(){
+        Intent intent=getIntent();
+
+        Bundle bundle=new Bundle();
+        bundle.putBoolean("result",false);
+
+        intent.putExtra("result",bundle);
+        setResult(1, intent);
+        finish();
+    }
+
+    public boolean checkCorrectPass(ArrayList<Integer> list1, ArrayList<Integer> list2){
+        for(int i=0;i<4;i++){
+            int pass1=list1.get(i);
+            int pass2=list2.get(i);
+            if(pass1!=pass2){
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    public void passAgain(){
+        Intent intent=new Intent(this, SetPassAgain.class);
+        startActivityForResult(intent, 2);
+        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+    }
+}

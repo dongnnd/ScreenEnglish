@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <ImageView
+        android:id="@+id/ps_background"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="fitXY"
+        android:alpha="0.7"/>
+
+
+    <TextView
+        android:id="@+id/ps_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="80dp"
+        android:textSize="18sp"
+        android:text="Enter Passcode"/>
+    <LinearLayout
+        android:id="@+id/linear_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@+id/ps_title"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dp">
+        <ImageView
+            android:id="@+id/ps_pass1"
+            android:layout_width="13dp"
+            android:layout_height="13dp"
+            android:src="@drawable/open_dot"
+            android:layout_margin="3dp"/>
+        <ImageView
+            android:id="@+id/ps_pass2"
+            android:layout_width="13dp"
+            android:layout_height="13dp"
+            android:src="@drawable/open_dot"
+            android:layout_margin="3dp"/>
+        <ImageView
+            android:id="@+id/ps_pass3"
+            android:layout_width="13dp"
+            android:layout_height="13dp"
+            android:src="@drawable/open_dot"
+            android:layout_margin="3dp"/>
+        <ImageView
+            android:id="@+id/ps_pass4"
+            android:layout_width="13dp"
+            android:layout_height="13dp"
+            android:src="@drawable/open_dot"
+            android:layout_margin="3dp"/>
+    </LinearLayout>
+
+    <TableLayout
+        android:id="@+id/table_layout"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/linear_layout">
+        <TableRow>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="80dp"
+                android:orientation="horizontal">
+                <ImageView
+                    android:id="@+id/ps_1"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_margin="5dp"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/nr_1" />
+                <ImageView
+                    android:id="@+id/ps_2"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_margin="5dp"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/nr_2" />
+                <ImageView
+                    android:id="@+id/ps_3"
+                    android:layout_width="0dp"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/nr_3" />
+            </LinearLayout>
+        </TableRow>
+        <TableRow>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="80dp"
+                android:orientation="horizontal">
+                <ImageView
+                    android:id="@+id/ps_4"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_margin="5dp"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/nr_4" />
+                <ImageView
+                    android:id="@+id/ps_5"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_margin="5dp"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/nr_5" />
+                <ImageView
+                    android:id="@+id/ps_6"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_margin="5dp"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/nr_6" />
+            </LinearLayout>
+        </TableRow>
+        <TableRow>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="80dp"
+                android:orientation="horizontal">
+                <ImageView
+                    android:id="@+id/ps_7"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_margin="5dp"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/nr_7" />
+                <ImageView
+                    android:id="@+id/ps_8"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_margin="5dp"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/nr_8" />
+                <ImageView
+                    android:id="@+id/ps_9"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_margin="5dp"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/nr_9" />
+            </LinearLayout>
+        </TableRow>
+        <TableRow>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="80dp"
+                android:orientation="horizontal">
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_margin="5dp"
+                    android:layout_height="wrap_content"
+                    />
+                <ImageView
+                    android:id="@+id/ps_0"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_margin="5dp"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/nr_0" />
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_margin="5dp"
+                    android:layout_height="wrap_content"
+                    />
+            </LinearLayout>
+        </TableRow>
+    </TableLayout>
+
+    <TextView
+        android:id="@+id/ps_cancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:text="Cancel"
+        android:textColor="#ffffff"
+        android:textSize="20sp"
+        android:layout_margin="20dp"/>
+
+    <TextView
+        android:id="@+id/ps_del"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Delete"
+        android:textColor="#ffffff"
+        android:textSize="20sp"
+        android:layout_margin="20dp"/>
+
+</RelativeLayout>

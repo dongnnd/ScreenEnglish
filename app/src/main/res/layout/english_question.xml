@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:alpha="0.5">
+
+    <TextView
+        android:id="@+id/eq_word"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:textSize="30sp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:textColor="#ffffff"
+        android:textStyle="bold"/>
+    <TextView
+        android:id="@+id/eq_spelling"
+        android:layout_below="@+id/eq_word"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:textColor="#ffffff"
+        android:textSize="25sp"
+        android:textStyle="italic"/>
+    <ImageView
+        android:id="@+id/eq_speak"
+        android:layout_toRightOf="@+id/eq_spelling"
+        android:layout_below="@id/eq_word"
+        android:layout_marginTop="8dp"
+        android:layout_marginLeft="5dp"
+        android:layout_width="20dp"
+        android:layout_height="20dp" />
+
+    <Button
+        android:id="@+id/eq_btn1"
+        android:layout_below="@+id/eq_spelling"
+        android:layout_width="250dp"
+        android:layout_marginTop="30dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text="Nhà trẻ"
+        android:textColor="#ffffff"
+        android:background="@drawable/button_answer"/>
+    <Button
+        android:id="@+id/eq_btn2"
+        android:layout_below="@+id/eq_btn1"
+        android:layout_marginTop="30dp"
+        android:textColor="#ffffff"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text="Trường học"
+        android:background="@drawable/button_answer"/>
+    <Button
+        android:id="@+id/eq_btn3"
+        android:layout_below="@+id/eq_btn2"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:textColor="#ffffff"
+        android:layout_centerHorizontal="true"
+        android:text="Khu tập thể"
+        android:background="@drawable/button_answer"/>
+
+    <ImageView
+        android:id="@+id/eq_img_bottom"
+        android:layout_alignParentBottom="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/ic_arrow_scroll"/>
+
+</RelativeLayout>

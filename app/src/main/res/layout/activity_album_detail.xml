@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.dongnd.screenenglish.GalleryDetail">
+
+    <ImageView
+        android:id="@+id/gl_background"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="fitXY" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:id="@+id/gl_layout_singal"
+            android:layout_marginTop="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:orientation="horizontal"
+            android:layout_alignParentLeft="true">
+            <ImageView
+                android:id="@+id/gl_singal_1"
+                android:layout_width="8dp"
+                android:layout_height="8dp"
+                android:src="@drawable/close_dot"
+                />
+
+            <ImageView
+                android:id="@+id/gl_singal_2"
+                android:layout_width="8dp"
+                android:layout_height="8dp"
+                android:src="@drawable/close_dot"/>
+            <ImageView
+                android:id="@+id/gl_singal_3"
+                android:layout_width="8dp"
+                android:layout_height="8dp"
+                android:src="@drawable/close_dot"/>
+            <ImageView
+                android:id="@+id/gl_singal_4"
+                android:layout_width="8dp"
+                android:layout_height="8dp"
+                android:src="@drawable/close_dot"/>
+            <ImageView
+                android:id="@+id/gl_singal_5"
+                android:layout_width="8dp"
+                android:layout_height="8dp"
+                android:src="@drawable/close_dot"/>
+
+        </LinearLayout>
+        <TextView
+            android:id="@+id/gl_singal_text"
+            android:layout_toRightOf="@+id/gl_layout_singal"
+            android:layout_marginLeft="3dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="VIETTEL"
+            />
+
+        <ImageView
+            android:id="@+id/gl_battery_img"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="5dp"
+            android:layout_width="35dp"
+            android:layout_height="11dp"
+            android:src="@drawable/battery4"/>
+        <TextView
+            android:id="@+id/gl_battery_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:textSize="12sp"
+            android:text="100%"
+            android:layout_toLeftOf="@+id/gl_battery_img"/>
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/gl_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextClock
+            android:id="@+id/gl_clock"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="70sp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="50dp"
+            android:textColor="#ffffff"/>
+        <TextView
+            android:id="@+id/gl_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/gl_clock"
+            android:layout_centerHorizontal="true"
+            android:textColor="#ffffff"
+            android:text="01/01/2000 Mon"
+            android:textSize="20sp"/>
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/gl_title">
+        <TextView
+            android:id="@+id/gl_word"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_centerHorizontal="true"
+            android:textSize="30sp"
+            android:text="Practice"
+            android:textColor="#ffffff"
+            android:textStyle="bold"/>
+        <TextView
+            android:id="@+id/gl_spelling"
+            android:layout_below="@+id/gl_word"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:text="BrE /ˈpræktɪs/"
+            android:textColor="#ffffff"
+            android:textSize="25sp"
+            android:textStyle="italic"/>
+        <ImageView
+            android:id="@+id/gl_speak"
+            android:layout_toRightOf="@+id/gl_spelling"
+            android:layout_below="@id/gl_word"
+            android:src="@drawable/speaker"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="10dp"
+            android:layout_width="20dp"
+            android:layout_height="20dp" />
+
+        <Button
+            android:id="@+id/gl_btn1"
+            android:layout_below="@+id/gl_spelling"
+            android:layout_width="250dp"
+            android:layout_marginTop="30dp"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:text="Luyện tập"
+            android:textColor="#ffffff"
+            android:background="@drawable/button_answer"/>
+        <Button
+            android:id="@+id/gl_btn2"
+            android:layout_below="@+id/gl_btn1"
+            android:layout_marginTop="30dp"
+            android:textColor="#ffffff"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:text="Trường học"
+            android:background="@drawable/button_answer"/>
+        <Button
+            android:id="@+id/gl_btn3"
+            android:layout_below="@+id/gl_btn2"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:textColor="#ffffff"
+            android:layout_centerHorizontal="true"
+            android:text="Tập chung"
+            android:background="@drawable/button_answer"/>
+
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/gl_bottom"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_margin="10dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/gl_cancel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:text="Hủy bỏ"
+            android:background="@drawable/demo2"
+            android:textColor="#ffffff"/>
+
+        <Button
+            android:id="@+id/gl_thietlap"
+            android:layout_width="0dp"
+            android:layout_weight="3"
+            android:layout_marginLeft="5dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:text="Thiết lập"
+            android:background="@drawable/demo2"
+            android:textColor="#ffffff"/>
+    </LinearLayout>
+
+</RelativeLayout>

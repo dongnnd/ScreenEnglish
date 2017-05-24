@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.dongnd.screenenglish.ChoseGrammar">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:minHeight="?attr/actionBarSize"
+        android:background="#1C9CF6"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        >
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#ffffff"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:text="Grammar Practice"
+            android:gravity="center"
+            />
+
+
+    </android.support.v7.widget.Toolbar>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/toolbar">
+
+        <ImageView
+            android:id="@+id/chose_gm_img"
+            android:layout_width="150dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="20dp"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/ic_practice"/>
+
+        <TextView
+            android:id="@+id/chose_gm_lythuyet"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Lý thuyết"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:layout_margin="10dp"
+            android:layout_below="@+id/chose_gm_img"
+            android:textColor="#FF6600"/>
+        <ImageView
+            android:id="@+id/chose_show"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_margin="10dp"
+            android:layout_below="@+id/chose_gm_img"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/ic_show"/>
+
+        <View
+            android:id="@+id/main_line_10"
+            android:layout_width="fill_parent"
+            android:layout_height="0.5dip"
+            android:layout_below="@+id/chose_gm_lythuyet"
+            android:layout_margin="10dp"
+            android:background="@color/sperated_line" />
+        <TextView
+            android:id="@+id/chose_luyentap"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Luyện tập"
+            android:layout_margin="10dp"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="#FF6600"
+            android:layout_below="@+id/main_line_10"/>
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_below="@+id/chose_luyentap"
+            android:background="@drawable/bg_grammar">
+
+
+            <TextView
+                android:id="@+id/chose_tongsocau"
+                android:layout_width="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_height="wrap_content"
+                android:text="Tổng số câu: 30"
+                android:textColor="#FFFF33"/>
+            <TextView
+                android:id="@+id/chose_socaudung"
+                android:layout_width="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_below="@+id/chose_tongsocau"
+                android:layout_height="wrap_content"
+                android:text="Số câu đúng:"
+                android:textColor="#FFFF33"/>
+
+            <TextView
+                android:id="@+id/chose_trangthai_title"
+                android:layout_width="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_alignParentRight="true"
+                android:layout_height="wrap_content"
+                android:text="Trạng thái:"
+                android:textColor="#FFFF33"/>
+            <TextView
+                android:id="@+id/chose_trangthai"
+                android:layout_width="wrap_content"
+                android:layout_marginTop="20dp"
+                android:textColor="#ff0000"
+                android:layout_below="@+id/chose_trangthai_title"
+                android:layout_alignParentRight="true"
+                android:layout_height="wrap_content" />
+
+            <Button
+                android:id="@+id/chose_button"
+                android:layout_width="wrap_content"
+                android:layout_below="@+id/chose_socaudung"
+                android:layout_centerHorizontal="true"
+                android:layout_height="wrap_content"
+                android:text="Làm bài"/>
+
+        </RelativeLayout>
+    </RelativeLayout>
+
+</RelativeLayout>

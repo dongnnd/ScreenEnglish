@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.dongnd.screenenglish">
+
+    <permission
+        android:name="com.example.dongnd.screenenglish.permission.C2D_MESSAGE"
+        android:protectionLevel="signature" />
+
+    <uses-permission android:name="com.example.dongnd.screenenglish.permission.C2D_MESSAGE" />
+    <uses-permission android:name="com.example.dongnd.screenenglish.permission.RECEIVE" />
+    <uses-permission android:name="android.permission.DISABLE_KEYGUARD" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.KILL_BACKGROUND_PROCESSES" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.FLASHLIGHT" />
+
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera.flash" />
+
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="com.android.alarm.permission.SET_ALARM" />
+    <uses-permission android:name="android.permission.RECEIVE_SMS" />
+    <uses-permission android:name="android.permission.READ_SMS" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <service
+            android:name="service.LockScreenService"
+            android:enabled="true"
+            android:exported="true" />
+
+        <receiver
+            android:name="recevier.BootReceiver"
+            android:enabled="true"
+            android:exported="true"
+            android:permission="com.google.android.c2dm.permission.SEND" />
+
+        <activity
+            android:name=".LockScreenActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/title_activity_lock_screen"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".SetPassActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".SetPassAgain"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ResetPass"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".VocabularySetting"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".SubjectVocabulary"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ChoseImgGallery"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".GalleryDetail"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".PassSetting"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".GrammarSetting"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".GrammarPractice"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ChoseGrammar"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".GrammarExplain"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".PracticeDetail" />
+
+        <service
+            android:name="service.NLService"
+            android:enabled="true"
+            android:exported="true"
+            android:permission="android.permission.BIND_NOTIFICATION_LISTENER_SERVICE">
+            <intent-filter>
+                <action android:name="android.service.notification.NotificationListenerService" />
+            </intent-filter>
+        </service>
+
+        <activity android:name=".VocabularyPractice" />
+        <activity android:name=".VocabularyError" />
+        <activity
+            android:name=".VocabularyNewList"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".VocabularyAdd"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".ChoseImgAlbum" />
+        <activity android:name=".AlbumDetail"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+    </application>
+
+</manifest>

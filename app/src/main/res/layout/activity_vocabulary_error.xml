@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.dongnd.screenenglish.VocabularyError">
+
+    <TextView
+        android:id="@+id/err_cau"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:background="#1C9CF6"
+        android:layout_margin="16dp"
+        android:gravity="center"
+        android:text="Từ 01/05"/>
+    <TextView
+        android:id="@+id/err_tile"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:background="#1C9CF6"
+        android:gravity="center"
+        android:layout_marginTop="16dp"
+        android:layout_toRightOf="@+id/err_cau"
+        android:text="Tỉ lệ: 0%"/>
+
+    <TextView
+        android:id="@+id/err_question"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
+        android:textSize="25sp"
+        android:layout_below="@+id/err_cau"
+        android:textStyle="bold"
+        android:text="Nature"/>
+    <TextView
+        android:id="@+id/err_spelling"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:textStyle="italic"
+        android:layout_below="@+id/err_question"/>
+    <ImageView
+        android:id="@+id/err_speaker"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/speaker"
+        android:layout_below="@+id/err_question"
+        android:layout_toRightOf="@+id/err_spelling"/>
+    <ImageView
+        android:id="@+id/err_img"
+        android:layout_width="wrap_content"
+        android:layout_height="100dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/err_spelling"/>
+
+    <RadioGroup
+        android:id="@+id/err_rdGroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_below="@+id/err_img"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="30dp">
+        <RadioButton
+            android:id="@+id/err_rd1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tàu thuyền"/>
+        <RadioButton
+            android:id="@+id/err_rd2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Thiên nhiên"/>
+        <RadioButton
+            android:id="@+id/err_rd3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Phát triển"/>
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/err_result"
+        android:layout_marginLeft="30dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/err_rdGroup"/>
+    <TextView
+        android:id="@+id/err_eg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/err_result"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="30dp"
+        android:textStyle="italic"
+        />
+
+    <Button
+        android:id="@+id/err_pre"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Pre"
+        android:layout_margin="16dp"
+        android:layout_alignParentBottom="true"
+        android:layout_toLeftOf="@+id/err_next"/>
+    <Button
+        android:id="@+id/err_next"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:text="Next"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"/>
+
+</RelativeLayout>
