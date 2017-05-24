@@ -21,7 +21,7 @@
             android:textColor="#ffffff"
             android:textSize="20sp"
             android:textStyle="bold"
-            android:text="Screen English"
+            android:text="Image Gallery"
             android:gravity="center"/>
 
 

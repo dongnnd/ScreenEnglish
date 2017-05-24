@@ -48,8 +48,8 @@ public class GalleryDetail extends AppCompatActivity {
     }
 
     public void init(){
-            imageView=(ImageView)findViewById(R.id.gl_background);
-            imageView.setImageResource(largeImg);
+        imageView=(ImageView)findViewById(R.id.gl_background);
+        imageView.setImageResource(largeImg);
 
 
         Typeface type = Typeface.createFromAsset(getAssets(), "lightfont.otf");
@@ -78,7 +78,7 @@ public class GalleryDetail extends AppCompatActivity {
             SharedPreferences sharedPreferences=getSharedPreferences("data", MODE_PRIVATE);
             SharedPreferences.Editor editor=sharedPreferences.edit();
 
-            editor.putInt("background", largeImg);
+            editor.putString("background", String.valueOf(largeImg));
             editor.commit();
 
             Toast.makeText(getApplicationContext(),"Đã lưu thay đổi", Toast.LENGTH_SHORT).show();

@@ -48,6 +48,9 @@ public class AlbumDetail extends AppCompatActivity {
     public void init(){
         imageView=(ImageView)findViewById(R.id.gl_background);
         File file=new File(path);
+
+        /*final BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inSampleSize = 8;*/
         Bitmap bitmap=BitmapFactory.decodeFile(file.getAbsolutePath());
         imageView.setImageBitmap(bitmap);
 

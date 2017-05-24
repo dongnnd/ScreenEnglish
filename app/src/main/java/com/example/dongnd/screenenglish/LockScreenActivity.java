@@ -22,6 +22,7 @@ import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.io.File;
 import java.util.ArrayList;
 
 import adapter.EnglishAdapter;
@@ -335,18 +336,23 @@ public class LockScreenActivity extends Activity {
 
 
         background = (ImageView) view.findViewById(R.id.background);
-        background.setImageResource(getBackground());
+        getBackground();
 
 
     }
 
-    public int getBackground() {
-        int background=sharedPreferences.getInt("background", 0);
-        if(background!=0){
-            return background;
+    public void getBackground() {
+        String strBackground=sharedPreferences.getString("background", null);
+        if(strBackground.contains("/")){
+            File file=new File(strBackground);
+            Bitmap bitmap=BitmapFactory.decodeFile(file.getAbsolutePath());
+            background.setImageBitmap(bitmap);
+        }else{
+            background.setImageResource(Integer.parseInt(strBackground));
         }
 
-        return R.drawable.iphone;
+
+
     }
 
     public void initSidingDrawer() {

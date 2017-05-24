@@ -49,7 +49,7 @@ public class DbAdapter extends SQLiteOpenHelper{
     }
 
     public boolean checkPath(){
-        dbPath= Environment.getExternalStorageDirectory().getAbsolutePath()+"/Download/"+DB_NAME;
+        dbPath= Environment.getExternalStorageDirectory().getAbsolutePath()+"/ScreenEnglish/"+DB_NAME;
 
         File fileDB=new File(dbPath);
         if(fileDB.exists()){
