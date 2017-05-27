@@ -62,7 +62,8 @@ public class MainActivity extends AppCompatActivity {
     public LockScreenService lockScreenService;
 
     public SharedPreferences sharedPreferences;
-    SharedPreferences.Editor editor;
+
+    public SharedPreferences.Editor editor;
 
     public DbAdapter db;
 
@@ -94,10 +95,14 @@ public class MainActivity extends AppCompatActivity {
         getInfoNetwork();
 
         // Khởi chạy service
-        startService(new Intent(this, LockScreenService.class));
+        start();
 
         editor.putString("list_error","1,2,3,4");
         editor.commit();
+    }
+
+    public void start(){
+        startService(new Intent(this, LockScreenService.class));
     }
 
 
@@ -594,6 +599,10 @@ public class MainActivity extends AppCompatActivity {
     };
 
     public static MainActivity getInstance() {
+        if(mainActivity==null){
+            mainActivity=new MainActivity();
+        }
+
         return mainActivity;
     }
 

@@ -62,7 +62,7 @@ public class LockScreenService extends Service{
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         onTaskRemoved(intent);
-        return START_NOT_STICKY;
+        return START_STICKY;
     }
 
     @Override

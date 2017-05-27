@@ -1,5 +1,6 @@
 package recevier;
 
+import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -26,6 +27,14 @@ public class BootReceiver extends BroadcastReceiver {
             if(mainActivity.getState()){
                 BootReceiver.this.startUnlockScreen(context);
             }
+        }else if("android.intent.action.BOOT_COMPLETED".equals(intent.getAction())){
+            Intent main=new Intent(context, MainActivity.class);
+            main.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            context.startActivity(main);
+           // ((MainActivity)context).finish();
+            Intent locscreen=new Intent(context, LockScreenActivity.class);
+            locscreen.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            context.startActivity(locscreen);
         }
     }
 

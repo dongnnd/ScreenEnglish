@@ -343,12 +343,16 @@ public class LockScreenActivity extends Activity {
 
     public void getBackground() {
         String strBackground=sharedPreferences.getString("background", null);
-        if(strBackground.contains("/")){
-            File file=new File(strBackground);
-            Bitmap bitmap=BitmapFactory.decodeFile(file.getAbsolutePath());
-            background.setImageBitmap(bitmap);
+        if(strBackground==null){
+            background.setImageResource(R.drawable.a28);
         }else{
-            background.setImageResource(Integer.parseInt(strBackground));
+            if(strBackground.contains("/")){
+                File file=new File(strBackground);
+                Bitmap bitmap=BitmapFactory.decodeFile(file.getAbsolutePath());
+                background.setImageBitmap(bitmap);
+            }else{
+                background.setImageResource(Integer.parseInt(strBackground));
+            }
         }
 
 
