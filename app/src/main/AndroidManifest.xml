@@ -61,19 +61,20 @@
             android:enabled="true"
             android:exported="true"
             android:permission="com.google.android.c2dm.permission.SEND">
-
             <intent-filter android:priority="999">
-                <action android:name="android.intent.action.PHONE_STATE"/>
-                <action android:name="android.intent.action.BOOT_COMPLETED"/>
-                <action android:name="android.intent.action.QUICKBOOT_POWERON"/>
+                <action android:name="android.intent.action.PHONE_STATE" />
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.QUICKBOOT_POWERON" />
+
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </receiver>
 
         <activity
             android:name=".LockScreenActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:screenOrientation="portrait"
             android:label="@string/title_activity_lock_screen"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <activity
             android:name=".SetPassActivity"
@@ -135,10 +136,12 @@
             </intent-filter>
         </service>
 
-        <activity android:name=".VocabularyPractice"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".VocabularyError"
-            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".VocabularyPractice"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".VocabularyError"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".VocabularyNewList"
             android:screenOrientation="portrait"
@@ -155,7 +158,19 @@
             android:name=".AlbumDetail"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".VocabularyRemind"
+            android:theme="@style/AppTheme.NoActionBar" />
 
+        <service
+            android:name="service.AlarmService"
+            android:enabled="true"
+            android:exported="true" />
+
+        <receiver
+            android:name="recevier.AlarmReceiver"
+            android:enabled="true"
+            android:exported="true"></receiver>
     </application>
 
 </manifest>

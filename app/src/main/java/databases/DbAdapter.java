@@ -44,12 +44,12 @@ public class DbAdapter extends SQLiteOpenHelper{
     public DbAdapter(Context context){
         super(context, DB_NAME, null, 1);
         mainActivity=MainActivity.getInstance();
-        sharedPreferences=mainActivity.getSharedPreferences("data",Context.MODE_PRIVATE);
+        sharedPreferences=context.getSharedPreferences("data",Context.MODE_PRIVATE);
         editor=sharedPreferences.edit();
     }
 
     public boolean checkPath(){
-        dbPath= Environment.getExternalStorageDirectory().getAbsolutePath()+"/Download/"+DB_NAME;
+        dbPath= Environment.getExternalStorageDirectory().getAbsolutePath()+"/ScreenEnglish/"+DB_NAME;
 
         File fileDB=new File(dbPath);
         if(fileDB.exists()){

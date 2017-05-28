@@ -10,6 +10,9 @@ import android.util.Log;
 import com.example.dongnd.screenenglish.LockScreenActivity;
 import com.example.dongnd.screenenglish.MainActivity;
 
+import java.util.Calendar;
+
+import service.AlarmService;
 import service.LockScreenService;
 
 import static android.content.Context.MODE_PRIVATE;
@@ -17,13 +20,16 @@ import static android.content.Context.MODE_PRIVATE;
 public class BootReceiver extends BroadcastReceiver {
 
     MainActivity mainActivity=MainActivity.getInstance();
+    public SharedPreferences sharedPreferences;
 
     public BootReceiver() {
     }
 
     @Override
     public void onReceive(Context context, Intent intent) {
+
         if (intent.getAction().equals(Intent.ACTION_SCREEN_OFF)) {
+
             if(mainActivity.getState()){
                 BootReceiver.this.startUnlockScreen(context);
             }
@@ -36,6 +42,7 @@ public class BootReceiver extends BroadcastReceiver {
             locscreen.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             context.startActivity(locscreen);
         }
+
     }
 
     public void startUnlockScreen(Context context){
@@ -43,4 +50,6 @@ public class BootReceiver extends BroadcastReceiver {
         lockactivity.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         context.startActivity(lockactivity);
     }
+
+
 }

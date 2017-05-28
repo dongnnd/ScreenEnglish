@@ -45,7 +45,6 @@ public class VocabularyNewList extends AppCompatActivity {
 
         sharedPreferences=getSharedPreferences("data", MODE_PRIVATE);
         editor=sharedPreferences.edit();
-
         init();
     }
 

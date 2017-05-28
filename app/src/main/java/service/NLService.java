@@ -126,7 +126,7 @@ public class NLService extends NotificationListenerService {
 
                     String pack=sbn1.getPackageName();
                     String title=extras.getString("android.title");
-                    String content=extras.getCharSequence("android.text").toString();
+                    String content=extras.getString("android.text");
                     i2.putExtra("pack", pack);
                     i2.putExtra("title", title);
                     i2.putExtra("content", content);

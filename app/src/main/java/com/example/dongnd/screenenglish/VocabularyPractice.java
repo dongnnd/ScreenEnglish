@@ -13,7 +13,7 @@ public class VocabularyPractice extends AppCompatActivity {
     private String title="(Bạn có thể học các từ vựng đã chọn sai trên màn hình khóa hoặc tạo mới " +
             "từ danh sách bằng cách chọn chức năng tương ứng)";
 
-    private Button vp_chose, vp_error;
+    private Button vp_chose, vp_error, vp_remind;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +31,9 @@ public class VocabularyPractice extends AppCompatActivity {
         vp_chose.setOnClickListener(vpClick);
         vp_error=(Button)findViewById(R.id.vp_error_list);
         vp_error.setOnClickListener(vpClick);
+
+        vp_remind=(Button)findViewById(R.id.vp_chose_remind);
+        vp_remind.setOnClickListener(vpClick);
     }
 
     public View.OnClickListener vpClick=new View.OnClickListener() {
@@ -43,7 +46,12 @@ public class VocabularyPractice extends AppCompatActivity {
                Intent intent=new Intent(getApplicationContext(), VocabularyError.class);
                intent.putExtra("type","list_error");
                startActivity(intent);
+           }else if(v.getId()==R.id.vp_chose_remind){
+                Intent intent=new Intent(getApplicationContext(), VocabularyRemind.class);
+               startActivity(intent);
            }
         }
     };
+
+
 }

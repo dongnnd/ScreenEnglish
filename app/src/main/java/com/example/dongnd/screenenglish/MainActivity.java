@@ -178,6 +178,8 @@ public class MainActivity extends AppCompatActivity {
         boolean stateVc=sharedPreferences.getBoolean("stateVc", false);
         boolean stateGm=sharedPreferences.getBoolean("stateGm", false);
 
+        boolean stateRemind=sharedPreferences.getBoolean("stateRemind", false);
+
         if(subjectselect==null){
             editor.putString("subjectselect", subjects.get(0).getSb_title());
             editor.putString(subjects.get(0).getSb_title(), db.getIdSubject(subjects.get(0).getSb_title()));
@@ -207,6 +209,10 @@ public class MainActivity extends AppCompatActivity {
 
         if(notification==false){
             editor.putBoolean("notification", false);
+            editor.commit();
+        }
+        if(stateRemind==false){
+            editor.putBoolean("stateRemind", false);
             editor.commit();
         }
 
