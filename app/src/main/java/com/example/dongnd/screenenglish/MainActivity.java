@@ -1,7 +1,9 @@
 package com.example.dongnd.screenenglish;
 
 import android.app.ActivityManager;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -56,6 +58,11 @@ public class MainActivity extends AppCompatActivity {
     // Âm thanh khóa
     public TextView locksound_kichhoat;
     public ImageView locksound_img;
+
+    // Tùy chọn khóa màn hình
+    public TextView lock_kichhoat;
+    private AlertDialog alertDialog1;
+    private CharSequence[] values = {" First Item "," Second Item "," Third Item "};
 
 
     public int singalNetwork = 0;
@@ -308,6 +315,9 @@ public class MainActivity extends AppCompatActivity {
         locksound_kichhoat=(TextView)findViewById(R.id.locksound_kichhoat);
         locksound_kichhoat.setOnClickListener(locksound);
         locksound_img=(ImageView)findViewById(R.id.locksound_img);
+
+        lock_kichhoat=(TextView)findViewById(R.id.lock_kichhoat);
+        lock_kichhoat.setOnClickListener(lockKichhoat);
     }
 
 
@@ -681,6 +691,46 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     };
+
+    public View.OnClickListener lockKichhoat=new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            showOptionLock();
+        }
+    };
+
+    public void showOptionLock(){
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+
+        builder.setTitle("Select Your Choice");
+
+        builder.setSingleChoiceItems(values, -1, new DialogInterface.OnClickListener() {
+
+            public void onClick(DialogInterface dialog, int item) {
+
+                switch(item)
+                {
+                    case 0:
+
+                        Toast.makeText(MainActivity.this, "First Item Clicked", Toast.LENGTH_LONG).show();
+                        break;
+                    case 1:
+
+                        Toast.makeText(MainActivity.this, "Second Item Clicked", Toast.LENGTH_LONG).show();
+                        break;
+                    case 2:
+
+                        Toast.makeText(MainActivity.this, "Third Item Clicked", Toast.LENGTH_LONG).show();
+                        break;
+                }
+                alertDialog1.dismiss();
+            }
+        });
+        alertDialog1 = builder.create();
+        alertDialog1.show();
+
+    }
 
     public static MainActivity getInstance() {
         if(mainActivity==null){
