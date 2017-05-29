@@ -330,7 +330,12 @@ public class DbAdapter extends SQLiteOpenHelper{
         Cursor cursor=db.query("ExplainGm", new String[]{"grammar"}, "ex_ref"+" =?",
                 new String[]{String.valueOf(id)}, null, null, null);
         cursor.moveToFirst();
-        result=cursor.getString(0);
+        //result=cursor.getString(0);
+        if(cursor==null){
+            return null;
+        }else{
+            result=cursor.getString(0);
+        }
 
         return result;
     }

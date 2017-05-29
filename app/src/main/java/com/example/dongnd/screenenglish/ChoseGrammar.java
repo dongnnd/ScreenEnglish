@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import databases.DbAdapter;
 
@@ -34,8 +35,12 @@ public class ChoseGrammar extends AppCompatActivity {
         grammar=db.getExGrammar(gmId);
 
 
+        if(db.getScore(gmId)==null){
+            Toast.makeText(getApplicationContext(),"Cơ sở dữ liệu chưa sẵn sàng", Toast.LENGTH_SHORT).show();
+        }else{
+            setNameTitle();
+        }
 
-        setNameTitle();
 
     }
 
@@ -93,9 +98,9 @@ public class ChoseGrammar extends AppCompatActivity {
     public View.OnClickListener gmButton=new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            Intent intent=new Intent(ChoseGrammar.this, PracticeDetail.class);
+            /*Intent intent=new Intent(ChoseGrammar.this, PracticeDetail.class);
             intent.putExtra("gmId", gmId);
-            startActivityForResult(intent, 2);
+            startActivityForResult(intent, 2);*/
         }
     };
 

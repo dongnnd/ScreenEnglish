@@ -62,8 +62,10 @@ public class MainActivity extends AppCompatActivity {
     // Tùy chọn khóa màn hình
     public TextView lock_kichhoat;
     private AlertDialog alertDialog1;
-    private CharSequence[] values = {" First Item "," Second Item "," Third Item "};
+    private CharSequence[] values = {"Chọn đúng đáp án để mở khóa "," Bắt buộc nhập mã PIN để mở khóa"};
 
+    // Thời tiết
+    private TextView weather_kichhoat;
 
     public int singalNetwork = 0;
     public String operatorName = "";
@@ -215,6 +217,10 @@ public class MainActivity extends AppCompatActivity {
 
         boolean stateLockSound=sharedPreferences.getBoolean("stateLockSound", false);
 
+        String stateUnlock=sharedPreferences.getString("stateUnlock", null);
+
+        boolean stateWeather=sharedPreferences.getBoolean("stateWeather", false);
+
         if(subjectselect==null){
             editor.putString("subjectselect", subjects.get(0).getSb_title());
             editor.putString(subjects.get(0).getSb_title(), db.getIdSubject(subjects.get(0).getSb_title()));
@@ -258,6 +264,16 @@ public class MainActivity extends AppCompatActivity {
 
         if(stateLockSound==false){
             editor.putBoolean("stateLockSound", false);
+            editor.commit();
+        }
+
+        if(stateUnlock==null){
+            editor.putString("stateUnlock", "state1");
+            editor.commit();
+        }
+
+        if(stateWeather==false){
+            editor.putBoolean("stateWeather", false);
             editor.commit();
         }
 
@@ -318,6 +334,9 @@ public class MainActivity extends AppCompatActivity {
 
         lock_kichhoat=(TextView)findViewById(R.id.lock_kichhoat);
         lock_kichhoat.setOnClickListener(lockKichhoat);
+
+        weather_kichhoat=(TextView)findViewById(R.id.weather_kichhoat);
+        weather_kichhoat.setOnClickListener(weather);
     }
 
 
@@ -703,7 +722,7 @@ public class MainActivity extends AppCompatActivity {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
 
-        builder.setTitle("Select Your Choice");
+        builder.setTitle("Phương thức mở khóa");
 
         builder.setSingleChoiceItems(values, -1, new DialogInterface.OnClickListener() {
 
@@ -713,16 +732,13 @@ public class MainActivity extends AppCompatActivity {
                 {
                     case 0:
 
-                        Toast.makeText(MainActivity.this, "First Item Clicked", Toast.LENGTH_LONG).show();
+                        Toast.makeText(MainActivity.this, "Chọn đáp án để mở khóa", Toast.LENGTH_LONG).show();
                         break;
                     case 1:
 
-                        Toast.makeText(MainActivity.this, "Second Item Clicked", Toast.LENGTH_LONG).show();
+                        Toast.makeText(MainActivity.this, "Nhập mã PIN để mở khóa", Toast.LENGTH_LONG).show();
                         break;
-                    case 2:
 
-                        Toast.makeText(MainActivity.this, "Third Item Clicked", Toast.LENGTH_LONG).show();
-                        break;
                 }
                 alertDialog1.dismiss();
             }
@@ -731,6 +747,15 @@ public class MainActivity extends AppCompatActivity {
         alertDialog1.show();
 
     }
+
+    public View.OnClickListener weather=new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            Intent intent=new Intent(getApplicationContext(), Weather.class);
+            startActivity(intent);
+            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+        }
+    };
 
     public static MainActivity getInstance() {
         if(mainActivity==null){

@@ -5,11 +5,13 @@ import android.bluetooth.BluetoothAdapter;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.hardware.Camera;
 import android.media.MediaPlayer;
 
 import android.net.wifi.WifiManager;
 import android.provider.AlarmClock;
+import android.provider.CalendarContract;
 import android.provider.Settings;
 import android.text.Html;
 import android.util.Log;
@@ -361,11 +363,30 @@ public class EnglishAdapter extends android.support.v4.view.PagerAdapter{
                 }
                 context.finish();
             }else{
-
+                errorAnswer(answer);
+                eq_btn1.setEnabled(false);
+                eq_btn2.setEnabled(false);
+                eq_btn3.setEnabled(false);
             }
 
         }
     };
+
+
+    public void errorAnswer(String answer){
+        String lowAndswer=answer.toLowerCase();
+        String ls1=eq_btn1.getText().toString().toLowerCase();
+        String ls2=eq_btn2.getText().toString().toLowerCase();
+        String ls3=eq_btn3.getText().toString().toLowerCase();
+
+        if(lowAndswer.equals(ls1)){
+            eq_btn1.setBackgroundColor(Color.RED);
+        }else if(lowAndswer.equals(ls2)){
+            eq_btn2.setBackgroundColor(Color.RED);
+        }else{
+            eq_btn3.setBackgroundColor(Color.RED);
+        }
+    }
 
     // Tao random dap an tu vung
     public void getRandom(int min, int max){
