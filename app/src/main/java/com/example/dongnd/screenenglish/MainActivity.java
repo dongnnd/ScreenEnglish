@@ -49,6 +49,14 @@ public class MainActivity extends AppCompatActivity {
     // Khai báo view cài đặt chung
     public ImageView notification_img;
 
+    // Khai báo rung
+    public TextView vibration_kichhoat;
+    public ImageView vibration_img;
+
+    // Âm thanh khóa
+    public TextView locksound_kichhoat;
+    public ImageView locksound_img;
+
 
     public int singalNetwork = 0;
     public String operatorName = "";
@@ -133,6 +141,10 @@ public class MainActivity extends AppCompatActivity {
 
         boolean notification=sharedPreferences.getBoolean("notification", false);
 
+        boolean stateVibration=sharedPreferences.getBoolean("stateVibration", false);
+
+        boolean stateLockSound=sharedPreferences.getBoolean("stateLockSound", false);
+
         if (state) {
             se_img.setImageResource(R.drawable.switch_on);
         } else {
@@ -162,6 +174,18 @@ public class MainActivity extends AppCompatActivity {
         }else{
             notification_img.setImageResource(R.drawable.switch_off);
         }
+
+        if(stateVibration){
+            vibration_img.setImageResource(R.drawable.switch_on);
+        }else{
+            vibration_img.setImageResource(R.drawable.switch_off);
+        }
+
+        if(stateLockSound){
+            locksound_img.setImageResource(R.drawable.switch_on);
+        }else{
+            locksound_img.setImageResource(R.drawable.switch_off);
+        }
     }
 
     // Set các giá trị mặc định khi lần đầu mở app
@@ -179,6 +203,10 @@ public class MainActivity extends AppCompatActivity {
         boolean stateGm=sharedPreferences.getBoolean("stateGm", false);
 
         boolean stateRemind=sharedPreferences.getBoolean("stateRemind", false);
+
+        boolean stateVibration=sharedPreferences.getBoolean("stateVibration", false);
+
+        boolean stateLockSound=sharedPreferences.getBoolean("stateLockSound", false);
 
         if(subjectselect==null){
             editor.putString("subjectselect", subjects.get(0).getSb_title());
@@ -213,6 +241,16 @@ public class MainActivity extends AppCompatActivity {
         }
         if(stateRemind==false){
             editor.putBoolean("stateRemind", false);
+            editor.commit();
+        }
+
+        if(stateVibration==false){
+            editor.putBoolean("stateVibration", false);
+            editor.commit();
+        }
+
+        if(stateLockSound==false){
+            editor.putBoolean("stateLockSound", false);
             editor.commit();
         }
 
@@ -262,6 +300,14 @@ public class MainActivity extends AppCompatActivity {
 
         notification_img=(ImageView)findViewById(R.id.notification_img);
         notification_img.setOnClickListener(notification);
+
+        vibration_kichhoat=(TextView)findViewById(R.id.vibration_kichhoat);
+        vibration_kichhoat.setOnClickListener(vibration);
+        vibration_img=(ImageView)findViewById(R.id.vibration_img);
+
+        locksound_kichhoat=(TextView)findViewById(R.id.locksound_kichhoat);
+        locksound_kichhoat.setOnClickListener(locksound);
+        locksound_img=(ImageView)findViewById(R.id.locksound_img);
     }
 
 
@@ -604,6 +650,38 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 
+    public View.OnClickListener vibration=new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            boolean stateVibration=sharedPreferences.getBoolean("stateVibration", false);
+            if(stateVibration){
+                editor.putBoolean("stateVibration", false);
+                editor.commit();
+                vibration_img.setImageResource(R.drawable.switch_off);
+            }else{
+                editor.putBoolean("stateVibration", true);
+                editor.commit();
+                vibration_img.setImageResource(R.drawable.switch_on) ;
+            }
+        }
+    };
+
+    public View.OnClickListener locksound=new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            boolean stateLockSound=sharedPreferences.getBoolean("stateLockSound", false);
+            if(stateLockSound){
+                editor.putBoolean("stateLockSound", false);
+                editor.commit();
+                locksound_img.setImageResource(R.drawable.switch_off);
+            }else{
+                editor.putBoolean("stateLockSound", true);
+                editor.commit();
+                locksound_img.setImageResource(R.drawable.switch_on);
+            }
+        }
+    };
+
     public static MainActivity getInstance() {
         if(mainActivity==null){
             mainActivity=new MainActivity();
@@ -611,7 +689,5 @@ public class MainActivity extends AppCompatActivity {
 
         return mainActivity;
     }
-
-
 
 }

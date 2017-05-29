@@ -11,6 +11,7 @@ import android.media.MediaPlayer;
 import android.net.wifi.WifiManager;
 import android.provider.AlarmClock;
 import android.provider.Settings;
+import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -54,9 +55,10 @@ public class EnglishAdapter extends android.support.v4.view.PagerAdapter{
 
 
     //Khai bao man hinh screen english question
-    private TextView eq_word, eq_spelling;
+    private TextView eq_word, eq_spelling, eq_eg;
     private Button eq_btn1, eq_btn2, eq_btn3;
     private ImageView eq_speak;
+
 
 
     //Khai bao man hinh screen english setting
@@ -186,7 +188,8 @@ public class EnglishAdapter extends android.support.v4.view.PagerAdapter{
     public void initEQuestion(View view){
         eq_word=(TextView)view.findViewById(R.id.eq_word);
 
-
+        eq_eg=(TextView)view.findViewById(R.id.eq_eg);
+        eq_eg.setText(Html.fromHtml(getEg("Eg: "+db.getStatement(id_question),question)));
 
         eq_btn1=(Button)view.findViewById(R.id.eq_btn1);
         eq_btn1.setOnClickListener(answer);
@@ -202,7 +205,7 @@ public class EnglishAdapter extends android.support.v4.view.PagerAdapter{
             eq_speak.setImageResource(R.drawable.speaker);
             eq_speak.setOnClickListener(speak);
         }
-        if(question.length()>10){
+        if(question.length()>15){
             eq_word.setTextSize(18);
             eq_word.setText(question);
         }else{
@@ -216,6 +219,57 @@ public class EnglishAdapter extends android.support.v4.view.PagerAdapter{
         }
 
         getRandom(1,3);
+    }
+
+    public String getEg(String str, String word){
+        String strLowerCase=str.toLowerCase();
+        int first=strLowerCase.indexOf(word);
+        if(first==0){
+            str=str.replace(getWordFirst(str), "<u><b>"+getWordFirst(str)+"</b></u>");
+
+        }else if(first==-1){
+            return str;
+        }else{
+            String subStr=str.substring(first, getIndex(str, first));
+            str=str.replace(subStr, "<u><b>"+subStr+"</u></b>");
+
+        }
+
+        return str;
+
+    }
+    public String getWordFirst(String str){
+        int end=-1;
+        for(int i=0;i<str.length();i++){
+            if(str.charAt(i)==' '){
+                end=i;
+                break;
+            }
+        }
+        if(end==-1){
+            return str;
+        }else{
+            return str.substring(0, end);
+        }
+    }
+    public int getIndex(String str, int start){
+        int index=-1;
+        if(start==-1){
+            return index;
+        }else{
+            for(int i=start;i<str.length();i++){
+                if(str.charAt(i)==' '){
+                    index=i;
+                    break;
+                }
+            }
+
+        }
+
+        if(index==-1){
+            return str.length();
+        }
+        return index;
     }
 
     public static EnglishAdapter getInstance(){

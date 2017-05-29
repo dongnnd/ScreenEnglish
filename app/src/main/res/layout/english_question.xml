@@ -32,11 +32,23 @@
         android:layout_width="20dp"
         android:layout_height="20dp" />
 
+    <TextView
+        android:id="@+id/eq_eg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/eq_spelling"
+        android:textColor="#ffffff"
+        android:textStyle="italic"
+        android:textSize="18sp"
+        android:layout_margin="20dp"
+        android:text="Eg: man-made substances not found in nature"/>
+
     <Button
         android:id="@+id/eq_btn1"
-        android:layout_below="@+id/eq_spelling"
+        android:layout_below="@+id/eq_eg"
         android:layout_width="250dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="15dp"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:text="Nhà trẻ"

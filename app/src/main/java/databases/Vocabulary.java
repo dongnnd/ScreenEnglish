@@ -43,7 +43,7 @@ public class Vocabulary {
     }
 
     public String getSpellingaa() {
-        return spellingaa;
+        return "BrE "+spellingaa;
     }
 
     public void setSpellingaa(String spellingaa) {
@@ -51,7 +51,7 @@ public class Vocabulary {
     }
 
     public String getSpellingam() {
-        return spellingam;
+        return "NAmE " +spellingam;
     }
 
     public void setSpellingam(String spellingam) {

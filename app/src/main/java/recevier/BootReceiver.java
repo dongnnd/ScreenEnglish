@@ -27,10 +27,11 @@ public class BootReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
+        sharedPreferences=context.getSharedPreferences("data", MODE_PRIVATE);
 
         if (intent.getAction().equals(Intent.ACTION_SCREEN_OFF)) {
 
-            if(mainActivity.getState()){
+            if(sharedPreferences.getBoolean("state", false)){
                 BootReceiver.this.startUnlockScreen(context);
             }
         }else if("android.intent.action.BOOT_COMPLETED".equals(intent.getAction())){

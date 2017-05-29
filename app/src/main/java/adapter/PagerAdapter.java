@@ -10,6 +10,8 @@ import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
+import android.media.MediaPlayer;
+import android.os.Vibrator;
 import android.provider.AlarmClock;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomSheetBehavior;
@@ -80,6 +82,9 @@ public class PagerAdapter extends android.support.v4.view.PagerAdapter {
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
 
+    // Khai bao rung
+    Vibrator vibrator;
+
 
     private ArrayList<Integer> userpass = new ArrayList<>();
 
@@ -96,6 +101,8 @@ public class PagerAdapter extends android.support.v4.view.PagerAdapter {
 
         sharedPreferences=context.getSharedPreferences("data", Context.MODE_PRIVATE);
         editor=sharedPreferences.edit();
+
+        vibrator= (Vibrator) this.context.getSystemService(Context.VIBRATOR_SERVICE);
 
 
        /* listener = new NotificationListener();
@@ -227,6 +234,9 @@ public class PagerAdapter extends android.support.v4.view.PagerAdapter {
     public View.OnClickListener passOnClick = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
+            if(sharedPreferences.getBoolean("stateVibration", false)){
+                vibrator.vibrate(100);
+            }
             int id = v.getId();
             switch (id) {
                 case R.id.ps_0:
@@ -366,8 +376,16 @@ public class PagerAdapter extends android.support.v4.view.PagerAdapter {
                 lockScreenActivity.finish();
             }
 
+            if(sharedPreferences.getBoolean("stateLockSound", false)){
+                MediaPlayer player=MediaPlayer.create(context, R.raw.unlock);
+                player.start();
+            }
+
 
         }else{
+            if(sharedPreferences.getBoolean("stateVibration", false)){
+                vibrator.vibrate(700);
+            }
             userpass.removeAll(userpass);
             lenghPass();
         }
