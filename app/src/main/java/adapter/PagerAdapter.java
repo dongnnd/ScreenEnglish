@@ -64,6 +64,9 @@ public class PagerAdapter extends android.support.v4.view.PagerAdapter {
     private TextView ns_date;
     private TextView ns_clear;
 
+    public TextView ns_vitri, ns_weather;
+    public ImageView ns_img;
+
     public ListView ns_listview;
     public NotificationAdapter ns_adapter;
     public ArrayList<NotificationItem> ns_List=new ArrayList<>();
@@ -447,6 +450,12 @@ public class PagerAdapter extends android.support.v4.view.PagerAdapter {
 
         ns_clear=(TextView)view.findViewById(R.id.ns_clear);
         ns_clear.setOnClickListener(nsClear);
+
+        ns_vitri=(TextView)view.findViewById(R.id.ns_vitri);
+        ns_weather=(TextView)view.findViewById(R.id.ns_weather);
+        ns_img=(ImageView)view.findViewById(R.id.ns_img);
+        ns_vitri.setText(lockScreenActivity.wt_city);
+
 
         ns_List=lockScreenActivity.ls_List;
         Log.d("tag","ABC: "+ns_List.size());

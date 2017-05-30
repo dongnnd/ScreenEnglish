@@ -30,6 +30,7 @@ public class BootReceiver extends BroadcastReceiver {
         sharedPreferences=context.getSharedPreferences("data", MODE_PRIVATE);
 
         if (intent.getAction().equals(Intent.ACTION_SCREEN_OFF)) {
+            Log.d("tag", "ON");
 
             if(sharedPreferences.getBoolean("state", false)){
                 BootReceiver.this.startUnlockScreen(context);
@@ -43,6 +44,7 @@ public class BootReceiver extends BroadcastReceiver {
             locscreen.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             context.startActivity(locscreen);
         }
+
 
     }
 

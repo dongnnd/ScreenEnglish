@@ -16,12 +16,17 @@ import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import adapter.DialogAdapter;
+import adapter.LockAdapter;
+import adapter.LockItem;
 import databases.DbAdapter;
 import databases.Subject;
 import databases.SubjectGm;
@@ -719,32 +724,25 @@ public class MainActivity extends AppCompatActivity {
     };
 
     public void showOptionLock(){
+    android.support.v7.app.AlertDialog.Builder builder=new android.support.v7.app.AlertDialog.Builder(this);
+        builder.setTitle("Hình thức mở khóa");
+        builder.setIcon(R.drawable.ic_select);
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+        List<LockItem> data=new ArrayList<>();
+        data.add(new LockItem(R.drawable.ic_lock_01, "Chọn đáp án chính xác để mở khóa"));
+        data.add(new LockItem(R.drawable.ic_lock_02, "Bắt buộc nhập mã PIN để mở khóa"));
 
-        builder.setTitle("Phương thức mở khóa");
+        LockAdapter adapter=new LockAdapter(this, R.layout.item_lock, data);
 
-        builder.setSingleChoiceItems(values, -1, new DialogInterface.OnClickListener() {
 
-            public void onClick(DialogInterface dialog, int item) {
+        builder.setAdapter(adapter, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
 
-                switch(item)
-                {
-                    case 0:
-
-                        Toast.makeText(MainActivity.this, "Chọn đáp án để mở khóa", Toast.LENGTH_LONG).show();
-                        break;
-                    case 1:
-
-                        Toast.makeText(MainActivity.this, "Nhập mã PIN để mở khóa", Toast.LENGTH_LONG).show();
-                        break;
-
-                }
-                alertDialog1.dismiss();
             }
         });
-        alertDialog1 = builder.create();
-        alertDialog1.show();
+
+        builder.show();
 
     }
 

@@ -55,6 +55,7 @@ public class LockScreenService extends Service{
         ((KeyguardManager)getSystemService(KEYGUARD_SERVICE)).newKeyguardLock("IN").disableKeyguard();
         IntentFilter localIntentFilter = new IntentFilter();
         localIntentFilter.addAction("android.intent.action.SCREEN_OFF");
+        localIntentFilter.addAction("android.intent.action.SCREEN_ON");
         this.bootReceiver = new BootReceiver();
         registerReceiver(this.bootReceiver, localIntentFilter);
     }

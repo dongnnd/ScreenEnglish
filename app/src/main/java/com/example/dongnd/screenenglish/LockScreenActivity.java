@@ -1,16 +1,25 @@
 package com.example.dongnd.screenenglish;
 
+import android.*;
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.PixelFormat;
 import android.graphics.Typeface;
+import android.location.Criteria;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
+import android.os.AsyncTask;
 import android.provider.Settings;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
 import android.util.Log;
@@ -22,7 +31,12 @@ import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import com.squareup.picasso.Picasso;
+
 import java.io.File;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 import adapter.EnglishAdapter;
@@ -34,9 +48,12 @@ import databases.DbAdapter;
 import databases.Question;
 import databases.Vocabulary;
 import service.NLService;
+import weather.Common;
+import weather.Helper;
+import weather.OpenWeather;
 
 
-public class LockScreenActivity extends Activity {
+public class LockScreenActivity extends Activity implements LocationListener{
 
     public WindowManager.LayoutParams params;
     public WindowManager wm;
@@ -81,6 +98,16 @@ public class LockScreenActivity extends Activity {
 
     public boolean allowNotifi=false;
 
+    public LocationManager locationManager;
+    public String provider;
+    public static double lat, lon;
+    public OpenWeather openWeather;
+    public String wt_city="A";
+    public String wt_date;
+    public String wt_celsius;
+    public String wt_description;
+    public String wt_icon;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -118,6 +145,10 @@ public class LockScreenActivity extends Activity {
         dbAdapter = new DbAdapter(this);
         getTypeEnglish();
 
+        // load Weather
+        if(sharedPreferences.getBoolean("stateWeather", false)){
+            showWeather();
+        }
 
         params = new WindowManager.LayoutParams(
                 WindowManager.LayoutParams.MATCH_PARENT,
@@ -163,6 +194,9 @@ public class LockScreenActivity extends Activity {
 
         // load slidingdrawer
         initSidingDrawer();
+
+
+
 
 
     }
@@ -216,6 +250,7 @@ public class LockScreenActivity extends Activity {
             } else {
 
                 if (checkPassState() == false || getStatePin() == false) {
+                    wm.removeView(myView);
                     finish();
                 }
             }
@@ -495,6 +530,117 @@ public class LockScreenActivity extends Activity {
             }
             return true;
         }
+
+
+    public void showWeather(){
+        openWeather=new OpenWeather();
+
+        locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        provider = locationManager.getBestProvider(new Criteria(), false);
+
+        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+
+            ActivityCompat.requestPermissions(LockScreenActivity.this, new String[]{
+                    android.Manifest.permission.INTERNET,
+                    android.Manifest.permission.ACCESS_COARSE_LOCATION,
+                    android.Manifest.permission.ACCESS_FINE_LOCATION,
+                    android.Manifest.permission.ACCESS_NETWORK_STATE,
+                    android.Manifest.permission.SYSTEM_ALERT_WINDOW,
+                    android.Manifest.permission.WRITE_EXTERNAL_STORAGE
+            }, 0);
+
+            return;
+        }
+        Location location = locationManager.getLastKnownLocation(provider);
+        lat=location.getLatitude();
+        lon=location.getLongitude();
+        new GetWeather().execute(Common.apiRequest(String.valueOf(lat), String.valueOf(lon)));
+    }
+
+
+    @Override
+    public void onProviderEnabled(String provider) {
+
+    }
+
+    @Override
+    public void onLocationChanged(Location location) {
+        lat=location.getLatitude();
+        lon=location.getLongitude();
+
+        new GetWeather().execute(Common.apiRequest(String.valueOf(lat), String.valueOf(lon)));
+    }
+
+    @Override
+    public void onStatusChanged(String provider, int status, Bundle extras) {
+
+    }
+
+    @Override
+    public void onProviderDisabled(String provider) {
+
+    }
+
+    private class GetWeather extends AsyncTask<String, Void, String> {
+        ProgressDialog progressDialog=new ProgressDialog(LockScreenActivity.this);
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            progressDialog.setTitle("Please wait...");
+            progressDialog.show();
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+            String stream=null;
+            String urlString=params[0];
+
+            Helper http=new Helper();
+            stream=http.getHttpData(urlString);
+            return stream;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+
+            Gson gson=new Gson();
+            Type mType=new TypeToken<OpenWeather>(){}.getType();
+            openWeather=gson.fromJson(s, mType);
+            progressDialog.dismiss();
+
+            wt_city=String.format("%s,%s", openWeather.getName(), openWeather.getSys().getCountry());
+            wt_date=String.format("Last update: %s", Common.getDate());
+            wt_celsius=String.format(String.format("%.2f °C", openWeather.getMain().getTemp()));
+            wt_description=String.format("%s", openWeather.getWeathers().get(0).getMain());
+            wt_icon=String.format("%s", openWeather.getWeathers().get(0).getIcon());
+
+
+            Log.d("tag", wt_city);
+            Log.d("tag", wt_description);
+            Log.d("tag", wt_celsius);
+            Log.d("tag", wt_icon);
+            adapter.ns_vitri.setText(wt_city);
+            Picasso.with(LockScreenActivity.this)
+                    .load(Common.getImage(openWeather.getWeathers().get(0).getIcon()))
+                    .into(adapter.ns_img);
+
+           /* text_city.setText(String.format("%s,%s", openWeather.getName(), openWeather.getSys().getCountry()));
+            text_update.setText(String.format("Last update: %s", Common.getDate()));
+            text_description.setText(String.format("%s", openWeather.getWeathers().get(0).getMain()));
+            text_celsius.setText(String.format("%.2f °C", openWeather.getMain().getTemp()));
+            Picasso.with(LockScreenActivity.this)
+                    .load(Common.getImage(openWeather.getWeathers().get(0).getIcon()))
+                    .into(image_view);*/
+        }
+
+
+        @Override
+        protected void onProgressUpdate(Void... values) {
+            super.onProgressUpdate(values);
+        }
+    }
 
 
 }

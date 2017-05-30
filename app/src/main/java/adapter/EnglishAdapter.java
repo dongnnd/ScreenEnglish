@@ -191,7 +191,10 @@ public class EnglishAdapter extends android.support.v4.view.PagerAdapter{
         eq_word=(TextView)view.findViewById(R.id.eq_word);
 
         eq_eg=(TextView)view.findViewById(R.id.eq_eg);
-        eq_eg.setText(Html.fromHtml(getEg("Eg: "+db.getStatement(id_question),question)));
+        if(getEg(db.getStatement(id_question),question)!=""){
+            eq_eg.setText(Html.fromHtml(getEg("Eg: "+db.getStatement(id_question),question)));
+        }
+
 
         eq_btn1=(Button)view.findViewById(R.id.eq_btn1);
         eq_btn1.setOnClickListener(answer);
@@ -225,17 +228,26 @@ public class EnglishAdapter extends android.support.v4.view.PagerAdapter{
 
     public String getEg(String str, String word){
         String strLowerCase=str.toLowerCase();
-        int first=strLowerCase.indexOf(word);
-        if(first==0){
-            str=str.replace(getWordFirst(str), "<u><b>"+getWordFirst(str)+"</b></u>");
 
-        }else if(first==-1){
+        if(!strLowerCase.contains(word)){
+            return str;
+        }else if(str==""){
             return str;
         }else{
-            String subStr=str.substring(first, getIndex(str, first));
-            str=str.replace(subStr, "<u><b>"+subStr+"</u></b>");
+            int first=strLowerCase.indexOf(word);
+            if(first==0){
+                str=str.replace(getWordFirst(str), "<u><b>"+getWordFirst(str)+"</b></u>");
 
+            }else if(first==-1){
+                return str;
+            }else{
+                String subStr=str.substring(first, getIndex(str, first));
+                str=str.replace(subStr, "<u><b>"+subStr+"</u></b>");
+
+            }
         }
+
+
 
         return str;
 

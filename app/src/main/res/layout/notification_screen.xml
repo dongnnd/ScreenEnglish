@@ -24,6 +24,34 @@
                 android:layout_centerHorizontal="true"
                 android:textColor="#ffffff"
                 android:textSize="20sp"/>
+            <TextView
+                android:id="@+id/ns_vitri"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@id/ns_date"
+                android:textSize="18sp"
+                android:textColor="#ffffff"
+                android:text="Minh Khai, Hà Nội"/>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@id/ns_vitri">
+                <TextView
+                    android:id="@+id/ns_weather"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="28 °C, Trời nhiều nắng"
+                    android:textSize="18sp"
+                    android:textColor="#ffffff"/>
+                <ImageView
+                    android:id="@+id/ns_img"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_sunny"/>
+            </LinearLayout>
 
         </RelativeLayout>
 

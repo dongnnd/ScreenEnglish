@@ -807,15 +807,29 @@
                         android:layout_height="35dp"
                         android:src="@drawable/ic_lock" />
 
-                    <TextView
-                        android:id="@+id/lock_kichhoat"
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginRight="10dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_toRightOf="@+id/lock_kichhoat_img"
-                        android:text="Tùy chọn khóa màn hình"
-                        android:textStyle="bold" />
+                        android:orientation="vertical"
+                        android:layout_toRightOf="@id/lock_kichhoat_img"
+                        android:layout_centerHorizontal="true"
+                        android:layout_centerVertical="true">
+                        <TextView
+                            android:id="@+id/lock_kichhoat"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="10dp"
+                            android:text="Tùy chọn khóa màn hình"
+                            android:textStyle="bold" />
+                        <TextView
+                            android:id="@+id/lock_status"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Nhập mã PIN để mở khóa"
+                            android:layout_below="@id/lock_kichhoat"
+                            android:textStyle="italic"
+                            android:textSize="10sp"/>
+                    </LinearLayout>
 
                 </RelativeLayout>
 

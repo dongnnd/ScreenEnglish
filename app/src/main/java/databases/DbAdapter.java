@@ -1,16 +1,21 @@
 package databases;
 
+import android.Manifest;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Environment;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.example.dongnd.screenenglish.LockScreenActivity;
 import com.example.dongnd.screenenglish.MainActivity;
 
 import java.io.File;
@@ -40,9 +45,11 @@ public class DbAdapter extends SQLiteOpenHelper{
     public MainActivity mainActivity;
     public SharedPreferences sharedPreferences;
     public SharedPreferences.Editor editor;
+    public Context context;
 
     public DbAdapter(Context context){
         super(context, DB_NAME, null, 1);
+        this.context=context;
         mainActivity=MainActivity.getInstance();
         sharedPreferences=context.getSharedPreferences("data",Context.MODE_PRIVATE);
         editor=sharedPreferences.edit();
@@ -60,6 +67,8 @@ public class DbAdapter extends SQLiteOpenHelper{
     }
 
     public SQLiteDatabase getWriteDatabase(){
+
+
         if(checkPath()){
             db=SQLiteDatabase.openDatabase(dbPath, null,  SQLiteDatabase.OPEN_READWRITE);
             return db;
@@ -416,7 +425,15 @@ public class DbAdapter extends SQLiteOpenHelper{
 
         cursor.moveToFirst();
         String str=cursor.getString(0);
-        String result=str.substring(str.indexOf("<li>")+4, str.indexOf("</li>"));
+
+        String result="";
+        if(str.indexOf("<li>")!=-1){
+             result=str.substring(str.indexOf("<li>")+4, str.indexOf("</li>"));
+        }else if(str.equals("N/A")){
+            result="";
+        }else{
+            result=str.substring(str.indexOf("<p>")+3, str.indexOf("</p>"));
+        }
 
         return result;
     }
