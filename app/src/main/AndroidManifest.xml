@@ -32,7 +32,6 @@
     <uses-permission android:name="android.permission.RECEIVE_SMS" />
     <uses-permission android:name="android.permission.READ_SMS" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-
     <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -188,6 +187,10 @@
 
         <service
             android:name="service.WeatherService"
+            android:enabled="true"
+            android:exported="true" />
+        <service
+            android:name="service.TrackGPS"
             android:enabled="true"
             android:exported="true"></service>
     </application>

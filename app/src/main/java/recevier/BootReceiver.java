@@ -37,7 +37,7 @@ public class BootReceiver extends BroadcastReceiver {
             }
         }else if("android.intent.action.BOOT_COMPLETED".equals(intent.getAction())){
             Intent main=new Intent(context, MainActivity.class);
-            main.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            main.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_NO_HISTORY);
             context.startActivity(main);
            // ((MainActivity)context).finish();
             Intent locscreen=new Intent(context, LockScreenActivity.class);

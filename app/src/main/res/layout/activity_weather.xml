@@ -94,13 +94,26 @@
                 android:src="@drawable/ic_rateus"
                 />
 
-            <TextView
-                android:id="@+id/temperature"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_toRightOf="@+id/rd_time_img"
-                android:text="Nhiệt độ"
-                android:textStyle="bold" />
+                android:orientation="vertical"
+                android:layout_toRightOf="@+id/rd_time_img">
+                <TextView
+                    android:id="@+id/temperature"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/rd_time_img"
+                    android:text="Nhiệt độ"
+                    android:textStyle="bold" />
+                <TextView
+                    android:id="@+id/temperature_cureent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="10sp"
+                    android:text="Hiển thị °C"
+                    android:textStyle="italic"/>
+            </LinearLayout>
         </RelativeLayout>
 
     </RelativeLayout>

@@ -61,10 +61,10 @@ public class PagerAdapter extends android.support.v4.view.PagerAdapter {
 
     // Khai bao layout notification
     private TextClock ns_clock;
-    private TextView ns_date;
-    private TextView ns_clear;
+    private TextView ns_date,ns_clear;
 
-    public TextView ns_vitri, ns_weather;
+
+    public TextView ns_vitri, ns_weather, ns_update;
     public ImageView ns_img;
 
     public ListView ns_listview;
@@ -182,6 +182,10 @@ public class PagerAdapter extends android.support.v4.view.PagerAdapter {
         BlurBuilder builder=new BlurBuilder();
         Bitmap bitmap1=builder.blur(context, bitmap);
         return bitmap1;
+    }
+
+    public Bitmap getImage(){
+        return ns_img.getDrawingCache();
     }
 
     public int getBackground(){
@@ -454,7 +458,7 @@ public class PagerAdapter extends android.support.v4.view.PagerAdapter {
         ns_vitri=(TextView)view.findViewById(R.id.ns_vitri);
         ns_weather=(TextView)view.findViewById(R.id.ns_weather);
         ns_img=(ImageView)view.findViewById(R.id.ns_img);
-        ns_vitri.setText(lockScreenActivity.wt_city);
+        ns_update=(TextView)view.findViewById(R.id.ns_update);
 
 
         ns_List=lockScreenActivity.ls_List;

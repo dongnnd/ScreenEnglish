@@ -37,7 +37,7 @@ public class Common {
     }
 
     public static String getDate(){
-        DateFormat dateFormat=new SimpleDateFormat("HH:mm");
+        DateFormat dateFormat=new SimpleDateFormat("dd/MM/yyyy HH:mm");
         Date date= new Date();
         return  dateFormat.format(date);
     }
