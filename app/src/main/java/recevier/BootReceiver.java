@@ -30,7 +30,11 @@ public class BootReceiver extends BroadcastReceiver {
         sharedPreferences=context.getSharedPreferences("data", MODE_PRIVATE);
 
         if (intent.getAction().equals(Intent.ACTION_SCREEN_OFF)) {
-            Log.d("tag", "ON");
+            if(LockScreenActivity.getInstance().wm!=null){
+                LockScreenActivity.getInstance().finish();
+            }else{
+                Log.d("tag","Khong ton tai");
+            }
 
             if(sharedPreferences.getBoolean("state", false)){
                 BootReceiver.this.startUnlockScreen(context);

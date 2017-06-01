@@ -358,23 +358,19 @@ public class EnglishAdapter extends android.support.v4.view.PagerAdapter{
                     }
                 }else{
                     String lap=sharedPreferences.getString("lap", null);
-                    if(lap.equals("lap2")){
-                        String subjectselect=sharedPreferences.getString("subjectselect", null);
-                        String subjectId=sharedPreferences.getString(subjectselect, null);
-                        String[] arrid=subjectId.split(",");
-                        if(arrid.length==1){
-                            String newId=db.getIdSubject(subjectselect);
-                            editor.putString(subjectselect, newId);
-                            editor.commit();
-                        }else{
-                            subjectId=subjectId.replace(","+id_question,"");
-                            editor.putString(subjectselect, subjectId);
-                            editor.commit();
-                        }
+                    if(lap.equals("lap1")){
+                        unlockVcLap1();
+                    }else{
+                        unlockVcLap2();
                     }
                 }
                 context.finish();
             }else{
+                if(sharedPreferences.getString("lap", null).equals("lap1")){
+                    lockVcLap1();
+                }else {
+                    lockVcLap2();
+                }
                 errorAnswer(answer);
                 eq_btn1.setEnabled(false);
                 eq_btn2.setEnabled(false);
@@ -383,6 +379,99 @@ public class EnglishAdapter extends android.support.v4.view.PagerAdapter{
 
         }
     };
+
+    public void unlockVcLap1(){
+        String subjectselect=sharedPreferences.getString("subjectselect", null);
+        String subjectId=sharedPreferences.getString(subjectselect, null);
+        String[] arrId=subjectId.split(",");
+
+        if(arrId.length==0){
+            subjectId=id_question+"";
+            editor.putString(subjectselect, subjectId);
+        }else {
+            if (!arrId[0].equals(id_question+"")) {
+                Log.d("tag", subjectId);
+                subjectId = subjectId.replace("," + id_question, "");
+                subjectId = id_question + "," + subjectId;
+                Log.d("tag", subjectId);
+                editor.putString(subjectselect, subjectId);
+                editor.commit();
+            }
+        }
+    }
+
+    public void unlockVcLap2(){
+        String subjectselect=sharedPreferences.getString("subjectselect", null);
+        String subjectId=sharedPreferences.getString(subjectselect, null);
+        String[] arrId=subjectId.split(",");
+
+        if(arrId.length==0){
+            subjectId=id_question+"";
+            editor.putString(subjectselect, subjectId);
+            editor.commit();
+        }else{
+            Log.d("tag", subjectId);
+            subjectId=subjectId.replace(","+id_question,"");
+
+            subjectId=id_question+","+subjectId;
+            Log.d("tag", subjectId);
+            editor.putString(subjectselect, subjectId);
+            editor.commit();
+        }
+    }
+
+    public void lockVcLap1(){
+        String subjectselect=sharedPreferences.getString("subjectselect", null);
+        String subjectId=sharedPreferences.getString(subjectselect, null);
+        String[] arrId=subjectId.split(",");
+
+        if(arrId.length==1){
+            editor.putString("subjectselect", "");
+            addListError(id_question);
+        }else{
+            if(arrId[0].equals(id_question)){
+                subjectId=subjectId.replace(id_question+",", "");
+                editor.putString(subjectselect, subjectId);
+                addListError(id_question);
+            }else{
+                subjectId=subjectId.replace(","+id_question,"");
+                editor.putString(subjectselect, subjectId);
+                addListError(id_question);
+            }
+        }
+    }
+
+    public void lockVcLap2(){
+        String subjectselect=sharedPreferences.getString("subjectselect", null);
+        String subjectId=sharedPreferences.getString(subjectselect, null);
+        String[] arrId=subjectId.split(",");
+
+        if(arrId.length==1){
+            editor.putString(subjectselect, "");
+            editor.commit();
+            addListError(id_question);
+        }else{
+            subjectId=subjectId.replace(","+id_question, "");
+            editor.putString(subjectselect, subjectId);
+            editor.commit();
+            addListError(id_question);
+        }
+
+    }
+
+    public void addListError(int id){
+        String list_error=sharedPreferences.getString("list_error", null);
+        if(list_error==""||list_error==null){
+            list_error=id+"";
+            editor.putString("list_error", list_error);
+            editor.commit();
+        }else {
+            list_error=list_error+","+id;
+            editor.putString("list_error", list_error);
+            editor.commit();
+        }
+        Log.d("tag", "ERROR:"+list_error);
+    }
 
 
     public void errorAnswer(String answer){

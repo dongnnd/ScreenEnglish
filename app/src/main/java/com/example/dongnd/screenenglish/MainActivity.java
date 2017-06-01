@@ -119,8 +119,7 @@ public class MainActivity extends AppCompatActivity {
         // Khởi chạy service
         start();
 
-        editor.putString("list_error","1,2,3,4");
-        editor.commit();
+
     }
 
     public void start(){
@@ -227,6 +226,7 @@ public class MainActivity extends AppCompatActivity {
         boolean stateWeather=sharedPreferences.getBoolean("stateWeather", false);
 
         String temperate=sharedPreferences.getString("temperate", null);
+
 
         if(subjectselect==null){
             editor.putString("subjectselect", subjects.get(0).getSb_title());

@@ -53,7 +53,7 @@ public class VocabularySetting extends AppCompatActivity {
             editor.commit();
             vcst_subject_curent.setText("Chủ đề hiện tại: Kinh Doanh");
         }else{
-            vcst_subject_curent.setText(subjectSelect);
+            vcst_subject_curent.setText("Chủ đề hiện tại: "+subjectSelect);
         }
 
         if(phienam==null){

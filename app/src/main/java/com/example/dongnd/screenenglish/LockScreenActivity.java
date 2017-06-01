@@ -539,7 +539,6 @@ public class LockScreenActivity extends Activity {
         }
     }
             // Kiểm tra hệ thống cho phép lấy notification hay không
-
         public boolean chechAllowNotification() {
             String enabledListeners = Settings.Secure.getString(getContentResolver(),
                     "enabled_notification_listeners");

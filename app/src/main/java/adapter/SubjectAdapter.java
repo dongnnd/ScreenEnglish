@@ -10,6 +10,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.media.Image;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -95,6 +96,8 @@ public class SubjectAdapter extends RecyclerView.Adapter<SubjectAdapter.SubjectV
                     SharedPreferences.Editor editor=sharedPreferences.edit();
                     editor.putString("subjectselect", subject.getSb_title());
                     editor.putString(subject.getSb_title(), db.getIdSubject(subject.getSb_title()));
+                    Log.d("tag", db.getIdSubject(subject.getSb_title()));
+                    editor.putString("list_error","");
                     editor.commit();
 
                     subjectVocabulary.sentData(subject.getSb_title());

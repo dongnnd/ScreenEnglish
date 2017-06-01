@@ -537,48 +537,7 @@ public class PagerAdapter extends android.support.v4.view.PagerAdapter {
     }
 
 
-    /*class NotificationListener extends BroadcastReceiver {
 
-        @Override
-        public void onReceive(Context context, Intent intent) {
-
-            String pack = intent.getStringExtra("pack");
-            String title = intent.getStringExtra("title");
-            String content = intent.getStringExtra("content");
-
-
-            byte[] byteArray =intent.getByteArrayExtra("img");
-            Bitmap bmp = null;
-            if(byteArray !=null) {
-                bmp = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
-            }
-
-            NotificationItem model = new NotificationItem();
-            model.setTitle(title);
-            model.setPack(pack);
-            model.setContent(content);
-            model.setImg(bmp);
-
-
-
-            if(ns_List !=null) {
-                if(model.getPack()!=null){
-                    ns_List.add(model);
-                    ns_adapter.notifyDataSetChanged();
-                }
-
-            }else {
-
-                if(model.getPack()!=null){
-                    ns_List = new ArrayList<NotificationItem>();
-                    ns_List.add(model);
-                    ns_adapter.notifyDataSetChanged();
-                }
-
-            }
-
-        }
-    }*/
     public int convertCF(int C){
         int valueF=(int)(C*1.8 +32);
 
