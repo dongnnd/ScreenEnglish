@@ -31,8 +31,7 @@
                 android:layout_centerHorizontal="true"
                 android:layout_below="@id/ns_date"
                 android:textSize="18sp"
-                android:textColor="#ffffff"
-                android:text="Minh Khai, Hà Nội"/>
+                android:textColor="#ffffff" />
             <LinearLayout
                 android:id="@+id/linealayout"
                 android:layout_width="wrap_content"
@@ -44,20 +43,20 @@
                     android:id="@+id/ns_weather"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="28 °C, Trời nhiều nắng"
                     android:textSize="18sp"
                     android:textColor="#ffffff"/>
                 <ImageView
                     android:id="@+id/ns_img"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
+                    android:scaleType="fitXY"
                     android:src="@drawable/ic_sunny"/>
             </LinearLayout>
             <TextView
                 android:id="@+id/ns_update"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="(LastUpdate: 22:46)"
+                android:textColor="#ffffff"
                 android:layout_below="@id/linealayout"
                 android:textStyle="italic"
                 android:layout_centerHorizontal="true"/>

@@ -16,6 +16,7 @@ import android.provider.AlarmClock;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.v4.view.ViewPager;
+import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -32,6 +33,7 @@ import com.example.dongnd.screenenglish.LockScreenActivity;
 import com.example.dongnd.screenenglish.MainActivity;
 import com.example.dongnd.screenenglish.R;
 
+import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -64,7 +66,7 @@ public class PagerAdapter extends android.support.v4.view.PagerAdapter {
     private TextView ns_date,ns_clear;
 
 
-    public TextView ns_vitri, ns_weather, ns_update;
+    public static TextView ns_vitri, ns_weather, ns_update;
     public ImageView ns_img;
 
     public ListView ns_listview;
@@ -459,6 +461,18 @@ public class PagerAdapter extends android.support.v4.view.PagerAdapter {
         ns_weather=(TextView)view.findViewById(R.id.ns_weather);
         ns_img=(ImageView)view.findViewById(R.id.ns_img);
         ns_update=(TextView)view.findViewById(R.id.ns_update);
+        if(sharedPreferences.getBoolean("stateWeather", false)){
+            ns_vitri.setText(sharedPreferences.getString("wt_city", null));
+            if(sharedPreferences.getString("temperate", null).equals("C")){
+                ns_weather.setText(sharedPreferences.getString("wt_celsius", null)+", "+sharedPreferences.getString("wt_description", null));
+            }else{
+                ns_weather.setText(convertCF(Integer.parseInt(sharedPreferences.getString("wt_celsius", null)))+", "+sharedPreferences.getString("wt_description", null));
+            }
+
+            ns_update.setText(sharedPreferences.getString("wt_date", null));
+
+
+        }
 
 
         ns_List=lockScreenActivity.ls_List;
@@ -468,6 +482,8 @@ public class PagerAdapter extends android.support.v4.view.PagerAdapter {
         ns_listview.setAdapter(ns_adapter);
         ns_listview.setOnItemClickListener(ns_listener);
     }
+
+
 
     public View.OnClickListener nsClear=new View.OnClickListener() {
         @Override
@@ -563,5 +579,10 @@ public class PagerAdapter extends android.support.v4.view.PagerAdapter {
 
         }
     }*/
+    public int convertCF(int C){
+        int valueF=(int)(C*1.8 +32);
+
+        return valueF;
+    }
 
 }

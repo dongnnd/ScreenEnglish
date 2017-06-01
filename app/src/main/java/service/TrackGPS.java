@@ -82,6 +82,7 @@ public class TrackGPS extends Service implements LocationListener {
 
                         if (loc != null) {
                             latitude = loc.getLatitude();
+                            Log.d("Network", latitude+"");
                             longitude = loc.getLongitude();
                         }
                     }

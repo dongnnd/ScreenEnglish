@@ -24,6 +24,7 @@ import android.provider.Settings;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
+import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -38,6 +39,7 @@ import com.google.gson.reflect.TypeToken;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.lang.reflect.Type;
@@ -117,6 +119,7 @@ public class LockScreenActivity extends Activity {
     private static final long MIN_TIME_BW_UPDATES = 1000 * 60 * 1;
     private boolean isNetworkEnable=false;
     private boolean isGpsEnable=false;
+    private Bitmap weather;
 
 
 
@@ -165,6 +168,9 @@ public class LockScreenActivity extends Activity {
                         | WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD
                         | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION,
                 PixelFormat.TRANSLUCENT);
+
+
+
 
         wm = (WindowManager) getSystemService(WINDOW_SERVICE);
         LayoutInflater inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
@@ -552,24 +558,15 @@ public class LockScreenActivity extends Activity {
         lon=trackGPS.getLongitude();
         Log.d("tag", lat+"");
         Log.d("tag", lon+"");
-        new GetWeather().execute(Common.apiRequest(String.valueOf(lat), String.valueOf(lon)));
+        if(Double.compare(lat, 0.0d)==0){
 
-    }
-
-    public void showWeatherSharePresent(){
-        String city=sharedPreferences.getString("wt_city", null);
-        String date=sharedPreferences.getString("wt_date", null);
-        String celsius=sharedPreferences.getString("wt_celsius", null);
-        String description=sharedPreferences.getString("wt_description", null);
-        String icon=sharedPreferences.getString("wt_icon", null);
-        if(city!=null){
-            adapter.ns_vitri.setText("AB");
-           /* adapter.ns_weather.setText(celsius+", "+description);
-            File file=new File(icon);
-            Bitmap bitmap=BitmapFactory.decodeFile(file.getAbsolutePath());
-            adapter.ns_img.setImageBitmap(bitmap);*/
+        }else{
+            new GetWeather().execute(Common.apiRequest(String.valueOf(lat), String.valueOf(lon)));
         }
+
+
     }
+
 
 
 
@@ -594,16 +591,30 @@ public class LockScreenActivity extends Activity {
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
+            Log.d("tag", "S "+s);
+            if(s==null){
 
-            Gson gson=new Gson();
-            Type mType=new TypeToken<OpenWeather>(){}.getType();
-            openWeather=gson.fromJson(s, mType);
-            if(openWeather!=null && lon!=0.0){
+                Log.d("tag", "BREAK");
+                Log.d("tag", sharedPreferences.getString("wt_city", null));
+                adapter.ns_vitri.setText(sharedPreferences.getString("wt_city", null));
+                adapter.ns_update.setText(sharedPreferences.getString("wt_date", null));
+            }else{
+                Gson gson=new Gson();
+                Type mType=new TypeToken<OpenWeather>(){}.getType();
+                openWeather=gson.fromJson(s, mType);
+
+                Log.d("tag", "NOT NULL");
                 wt_city=String.format("%s,%s", openWeather.getName(), openWeather.getSys().getCountry());
                 wt_date=String.format("Last update: %s", Common.getDate());
-                wt_celsius=String.format(String.format("%s °C",(int)openWeather.getMain().getTemp()));
-                wt_description=String.format("%s", openWeather.getWeathers().get(0).getMain());
+                if(sharedPreferences.getString("temperate", null).equals("C")){
+                    wt_celsius=String.format(String.format("%s",(int)openWeather.getMain().getTemp()));
+                }else{
+                    wt_celsius=String.format(String.format("%s",convertCF((int)openWeather.getMain().getTemp())));
+                }
+
+                wt_description=String.format("%s", openWeather.getWeathers().get(0).getDescription());
                 wt_icon=String.format("%s", openWeather.getWeathers().get(0).getIcon());
+
 
                 Log.d("tag", wt_city);
                 Log.d("tag", wt_description);
@@ -614,11 +625,9 @@ public class LockScreenActivity extends Activity {
                 editor.putString("wt_description", wt_description);
                 editor.putString("wt_celsius", wt_celsius);
                 editor.commit();
-                adapter.ns_vitri.setText(wt_city+"("+wt_date+")");
+                adapter.ns_vitri.setText(wt_city);
                 adapter.ns_weather.setText(wt_celsius+", "+wt_description);
-
-
-
+                adapter.ns_update.setText(wt_date);
 
                 Picasso.with(LockScreenActivity.this)
                         .load(Common.getImage(openWeather.getWeathers().get(0).getIcon()))
@@ -627,7 +636,7 @@ public class LockScreenActivity extends Activity {
                             public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
                                 adapter.ns_img.setImageBitmap(bitmap);
                                 String root = Environment.getExternalStorageDirectory().toString();
-                                File myDir = new File(root + "/ScreenEnglish/");
+                                File myDir = new File(root + "/Download/");
                                 String fname = "ic_weather.jpg";
                                 File file = new File (myDir, fname);
                                 if (file.exists ()) file.delete ();
@@ -641,8 +650,8 @@ public class LockScreenActivity extends Activity {
                                     e.printStackTrace();
                                 }
                                 String icon=Environment.getExternalStorageDirectory().toString()+"/Download/ic_weather.jpg";
-                                editor.putString("wt_icon", icon);
-                                editor.commit();
+
+
                             }
 
                             @Override
@@ -656,33 +665,8 @@ public class LockScreenActivity extends Activity {
                             }
                         });
 
-
-
-            }else{
-               /* String city=sharedPreferences.getString("wt_city", null);
-                String date=sharedPreferences.getString("wt_date", null);
-                String celsius=sharedPreferences.getString("wt_celsius", null);
-                String description=sharedPreferences.getString("wt_description", null);
-                String icon=sharedPreferences.getString("wt_icon", null);
-
-                adapter.ns_vitri.setText(city);
-                adapter.ns_weather.setText(celsius+", "+description);
-                File file=new File(icon);
-                Bitmap bitmap=BitmapFactory.decodeFile(file.getAbsolutePath());
-                adapter.ns_img.setImageBitmap(bitmap);
-
-                adapter.ns_update.setText(date);*/
-
-
             }
 
-           /* text_city.setText(String.format("%s,%s", openWeather.getName(), openWeather.getSys().getCountry()));
-            text_update.setText(String.format("Last update: %s", Common.getDate()));
-            text_description.setText(String.format("%s", openWeather.getWeathers().get(0).getMain()));
-            text_celsius.setText(String.format("%.2f °C", openWeather.getMain().getTemp()));
-            Picasso.with(LockScreenActivity.this)
-                    .load(Common.getImage(openWeather.getWeathers().get(0).getIcon()))
-                    .into(image_view);*/
         }
 
 
@@ -690,6 +674,12 @@ public class LockScreenActivity extends Activity {
         protected void onProgressUpdate(Void... values) {
             super.onProgressUpdate(values);
         }
+    }
+
+    public int convertCF(int C){
+        int valueF=(int)(C*1.8 +32);
+
+        return valueF;
     }
 
 

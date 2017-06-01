@@ -226,6 +226,8 @@ public class MainActivity extends AppCompatActivity {
 
         boolean stateWeather=sharedPreferences.getBoolean("stateWeather", false);
 
+        String temperate=sharedPreferences.getString("temperate", null);
+
         if(subjectselect==null){
             editor.putString("subjectselect", subjects.get(0).getSb_title());
             editor.putString(subjects.get(0).getSb_title(), db.getIdSubject(subjects.get(0).getSb_title()));
@@ -279,6 +281,11 @@ public class MainActivity extends AppCompatActivity {
 
         if(stateWeather==false){
             editor.putBoolean("stateWeather", false);
+            editor.commit();
+        }
+
+        if(temperate==null){
+            editor.putString("temperate", "C");
             editor.commit();
         }
 
@@ -342,6 +349,8 @@ public class MainActivity extends AppCompatActivity {
 
         weather_kichhoat=(TextView)findViewById(R.id.weather_kichhoat);
         weather_kichhoat.setOnClickListener(weather);
+
+
     }
 
 
