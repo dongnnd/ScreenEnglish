@@ -1,26 +1,37 @@
 package com.example.dongnd.screenenglish;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.media.MediaPlayer;
 import android.support.annotation.IdRes;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
 import adapter.CurrentVocabulary;
+import adapter.OnSwipeTouchListener;
 import databases.DbAdapter;
 import databases.VocabularyItem;
 
@@ -35,9 +46,11 @@ public class VocabularyError extends AppCompatActivity {
     private TextView err_question, err_spelling, err_eg, err_result, err_tile;
     private RadioGroup err_rdGroup;
     private RadioButton err_rd1, err_rd2, err_rd3;
-    private ImageView err_img;
+    private ImageView err_img, err_background, err_speaker, err_eedic;
 
-    private Button err_next, err_pre;
+    private RelativeLayout relativeLayout;
+
+    private ImageView err_next, err_pre;
     private int current=0;
 
     @Override
@@ -45,14 +58,38 @@ public class VocabularyError extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_vocabulary_error);
 
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
         sharedPreferences=getSharedPreferences("data", MODE_PRIVATE);
         editor=sharedPreferences.edit();
         db=new DbAdapter(this);
+
         getData();
 
         init();
 
+
         loadFist();
+
+    }
+
+    public void getBackground() {
+        String strBackground=sharedPreferences.getString("background", null);
+        if(strBackground==null){
+            err_background.setImageResource(R.drawable.a28);
+
+        }else{
+            if(strBackground.contains("/")){
+                File file=new File(strBackground);
+                Bitmap bitmap=BitmapFactory.decodeFile(file.getAbsolutePath());
+                err_background.setImageBitmap(bitmap);
+            }else{
+                err_background.setImageResource(Integer.parseInt(strBackground));
+            }
+        }
+
+
 
     }
 
@@ -67,20 +104,31 @@ public class VocabularyError extends AppCompatActivity {
         }
 
 
-        if(strList==null){
-
-        }else{
             String[] arrList=strList.split(",");
             for(int i=0;i<arrList.length;i++){
                 int id=Integer.parseInt(arrList[i]);
                 CurrentVocabulary vi=db.getItemError(id);
                 listError.add(vi);
             }
-        }
+
+
         Log.d("tag", listError.size()+"");
     }
 
     public void init(){
+        relativeLayout=(RelativeLayout)findViewById(R.id.err_relative_layout);
+        relativeLayout.setOnTouchListener(new OnSwipeTouchListener(this){
+            public void onSwipeLeft() {
+                Intent intent=new Intent(getApplicationContext(), VocabularyEEDic. class);
+                intent.putExtra("id", listError.get(current).getId());
+                startActivity(intent);
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+            }
+        });
+
+        err_background=(ImageView)findViewById(R.id.err_background);
+        err_background.setImageResource(R.drawable.bg_demo);
+
         err_question=(TextView)findViewById(R.id.err_question);
         err_spelling=(TextView)findViewById(R.id.err_spelling);
 
@@ -101,10 +149,16 @@ public class VocabularyError extends AppCompatActivity {
 
         err_result=(TextView)findViewById(R.id.err_result);
 
-        err_next=(Button)findViewById(R.id.err_next);
+        err_next=(ImageView) findViewById(R.id.err_next);
         err_next.setOnClickListener(errNext);
 
-        err_pre=(Button)findViewById(R.id.err_pre);
+        err_speaker=(ImageView)findViewById(R.id.err_speaker);
+        err_speaker.setOnClickListener(speaker);
+
+        err_eedic=(ImageView)findViewById(R.id.err_eedic);
+        err_eedic.setOnClickListener(eedic);
+
+        err_pre=(ImageView) findViewById(R.id.err_pre);
         err_pre.setEnabled(false);
         err_pre.setOnClickListener(errPre);
     }
@@ -117,8 +171,14 @@ public class VocabularyError extends AppCompatActivity {
         err_rd2.setText(listError.get(0).getErr1_mean());
         err_rd3.setText(listError.get(0).getErr2_mean());
 
-        Bitmap bm = BitmapFactory.decodeByteArray(listError.get(0).getImg(), 0, listError.get(0).getImg().length);
-        err_img.setImageBitmap(bm);
+
+        if(listError.get(0).getImg()!=null){
+            Bitmap bm = BitmapFactory.decodeByteArray(listError.get(0).getImg(), 0, listError.get(0).getImg().length);
+            err_img.setImageBitmap(bm);
+        }else{
+
+        }
+
         err_eg.setText("Eg: "+db.getStatement(listError.get(0).getId()));
     }
 
@@ -140,6 +200,16 @@ public class VocabularyError extends AppCompatActivity {
         }
     };
 
+    public View.OnClickListener eedic=new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            Intent intent=new Intent(getApplicationContext(), VocabularyEEDic. class);
+            intent.putExtra("id", listError.get(current).getId());
+            startActivity(intent);
+            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+        }
+    };
+
     public View.OnClickListener errPre=new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -155,6 +225,30 @@ public class VocabularyError extends AppCompatActivity {
             }
             CurrentVocabulary vi=listError.get(current);
             loadState(vi);
+        }
+    };
+
+    public View.OnClickListener speaker=new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            try {
+                File Mytemp = File.createTempFile("TCL", "mp3");
+                Mytemp.deleteOnExit();
+                FileOutputStream fos = new FileOutputStream(Mytemp);
+                fos.write(listError.get(current).getSound());
+                fos.close();
+
+                MediaPlayer mediaPlayer = new MediaPlayer();
+
+                FileInputStream MyFile = new FileInputStream(Mytemp);
+                mediaPlayer.setDataSource(MyFile.getFD());
+
+                mediaPlayer.prepare();
+                mediaPlayer.start();
+            } catch (IOException ex) {
+                String s = ex.toString();
+                ex.printStackTrace();
+            }
         }
     };
 

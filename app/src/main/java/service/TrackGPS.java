@@ -48,6 +48,7 @@ public class TrackGPS extends Service implements LocationListener {
         getLocation();
     }
 
+
     private Location getLocation() {
 
         try {

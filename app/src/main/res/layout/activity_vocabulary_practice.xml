@@ -31,6 +31,7 @@
         android:layout_below="@+id/vp_title"
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
+        android:textColor="#ffffff"
         android:text="Các từ sai trên màn hình khóa"
         android:background="@drawable/bg_vocabulary"/>
     <Button
@@ -41,6 +42,7 @@
         android:layout_marginRight="30dp"
         android:layout_marginTop="16dp"
         android:layout_below="@+id/vp_error_list"
+        android:textColor="#ffffff"
         android:text="Chọn từ danh sách"
         android:background="@drawable/bg_vocabulary"/>
     <Button
@@ -52,6 +54,7 @@
         android:layout_marginTop="16dp"
         android:layout_below="@+id/vp_chose_list"
         android:text="Thiết lập nhắc nhở"
+        android:textColor="#ffffff"
         android:background="@drawable/bg_vocabulary"/>
 
 </RelativeLayout>

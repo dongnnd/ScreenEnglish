@@ -148,7 +148,8 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".VocabularyError"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".VocabularyNewList"
             android:screenOrientation="portrait"
@@ -192,7 +193,11 @@
         <service
             android:name="service.TrackGPS"
             android:enabled="true"
-            android:exported="true"></service>
+            android:exported="true" />
+
+        <activity android:name=".VocabularyEEDic"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
