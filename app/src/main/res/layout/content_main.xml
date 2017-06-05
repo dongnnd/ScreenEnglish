@@ -373,7 +373,7 @@
                         android:layout_marginRight="10dp"
                         android:layout_marginTop="10dp"
                         android:layout_toRightOf="@+id/vc_kichhoat_img"
-                        android:text="Kích hoạt tính năng học từ vựng"
+                        android:text="Học từ vựng trên màn hình khóa"
                         android:textStyle="bold" />
 
                     <ImageView
@@ -503,7 +503,7 @@
                         android:layout_marginRight="10dp"
                         android:layout_marginTop="10dp"
                         android:layout_toRightOf="@+id/gm_kichhoat_img"
-                        android:text="Kích hoạt tính năng học ngữ pháp"
+                        android:text="Học ngữ pháp trên màn hình khóa"
                         android:textStyle="bold" />
 
                     <ImageView

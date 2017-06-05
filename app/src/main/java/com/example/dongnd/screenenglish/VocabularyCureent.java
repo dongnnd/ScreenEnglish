@@ -13,15 +13,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.view.Window;
 import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -35,9 +32,8 @@ import java.util.Random;
 import adapter.CurrentVocabulary;
 import adapter.OnSwipeTouchListener;
 import databases.DbAdapter;
-import databases.VocabularyItem;
 
-public class VocabularyError extends AppCompatActivity {
+public class VocabularyCureent extends AppCompatActivity {
 
     private String strList;
     private SharedPreferences sharedPreferences;
@@ -85,7 +81,7 @@ public class VocabularyError extends AppCompatActivity {
         }else{
             if(strBackground.contains("/")){
                 File file=new File(strBackground);
-                Bitmap bitmap=BitmapFactory.decodeFile(file.getAbsolutePath());
+                Bitmap bitmap= BitmapFactory.decodeFile(file.getAbsolutePath());
                 err_background.setImageBitmap(bitmap);
             }else{
                 err_background.setImageResource(Integer.parseInt(strBackground));
@@ -100,15 +96,15 @@ public class VocabularyError extends AppCompatActivity {
 
 
 
-            strList=sharedPreferences.getString("list_error", null);
+        strList=sharedPreferences.getString("currentList", null);
 
 
-            arrList=strList.split(",");
-            for(int i=0;i<arrList.length;i++){
-                int id=Integer.parseInt(arrList[i]);
-                CurrentVocabulary vi=db.getItemError(id);
-                listError.add(vi);
-            }
+        arrList=strList.split(",");
+        for(int i=0;i<arrList.length;i++){
+            int id=Integer.parseInt(arrList[i]);
+            CurrentVocabulary vi=db.getItemError(id);
+            listError.add(vi);
+        }
 
 
         Log.d("tag", listError.size()+"");
@@ -508,52 +504,21 @@ public class VocabularyError extends AppCompatActivity {
     }
 
     public void saveData(){
-
-        // Lấy danh sách các từ đúng
-        List<String> id_True=new ArrayList<>();
+        String str="";
         for(int i=0;i<listError.size();i++){
-            String select=listError.get(i).getSelect();
-            if(select!=null && select.toLowerCase().equals(listError.get(i).getTr_mean().toLowerCase())){
-                id_True.add(listError.get(i).getId()+"");
-            }
-        }
-
-
-        if(id_True.size()!=0){
-
-
-            // Insert cacs từ đúng vào danh sách màn hình khóa
-            String subjectselect=sharedPreferences.getString("subjectselect", null);
-            String subjectId=sharedPreferences.getString(subjectselect, null);
-
-            for(int i=0;i<id_True.size();i++){
-                if(subjectId.equals("")|| subjectId.equals(null)){
-                    subjectId+=id_True.get(i);
-                }else{
-                    subjectId+=","+id_True.get(i);
-
-                }
-            }
-            editor.putString(subjectselect, subjectId);
-
-
-            // Xoa cac tu da hoc khoi danh sach list_error
-
-            for(int i=0;i<id_True.size();i++){
-                String[] newArrList=strList.split(",");
-                if(newArrList.length==1){
-                    strList="";
-                }else{
-                    if(strList.indexOf(id_True.get(i))==0){
-                        strList=strList.replace(id_True.get(i)+",","");
+            String answear=listError.get(i).getSelect();
+            if(answear!=null){
+                if(answear==listError.get(i).getTr_mean()){
+                    if(str==""){
+                        str+=listError.get(i).getId();
                     }else{
-                        strList=strList.replace(","+id_True.get(i), "");
+                        str+=","+listError.get(i).getId();
                     }
                 }
             }
-            editor.putString("list_error", strList);
-            editor.commit();
-
         }
+
+        editor.putString("learned", str);
+        editor.commit();
     }
 }

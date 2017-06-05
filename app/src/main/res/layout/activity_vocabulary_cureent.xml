@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.dongnd.screenenglish.VocabularyError"
+    android:id="@+id/err_relative_layout">
+    <ImageView
+        android:id="@+id/err_background"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="fitXY"/>
+
+
+    <RelativeLayout
+        android:id="@+id/err_rl_01"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/err_tile_img"
+            android:layout_width="100dp"
+            android:layout_height="80dp"
+            android:src="@drawable/ic_tile"/>
+        <TextView
+            android:id="@+id/err_tile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/err_tile_img"
+            android:layout_alignTop="@+id/err_tile_img"
+            android:layout_alignRight="@+id/err_tile_img"
+            android:layout_alignBottom="@+id/err_tile_img"
+            android:layout_margin="1dp"
+            android:textColor="#ffffff"
+            android:gravity="center"
+            android:text="Tỉ lệ: 30%"/>
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/err_question"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
+        android:textSize="30sp"
+        android:layout_below="@+id/err_rl_01"
+        android:textStyle="bold"
+        android:textColor="#111111"
+        android:text="Nature"/>
+    <TextView
+        android:id="@+id/err_spelling"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:textStyle="italic"
+        android:layout_below="@+id/err_question"/>
+    <ImageView
+        android:id="@+id/err_speaker"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_speaker_red"
+        android:layout_below="@+id/err_question"
+        android:layout_margin="5dp"
+        android:layout_toRightOf="@+id/err_spelling"/>
+    <ImageView
+        android:id="@+id/err_img"
+        android:layout_width="wrap_content"
+        android:layout_height="150dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/err_spelling"
+        android:src="@drawable/demo3"/>
+    <ImageView
+        android:id="@+id/err_eedic"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_eedic"
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"/>
+    <TextView
+        android:id="@+id/err_eg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/err_img"
+        android:layout_marginTop="5dp"
+        android:textSize="18sp"
+        android:layout_centerHorizontal="true"
+        android:textColor="#111111"
+        android:textStyle="italic"
+        />
+
+    <RadioGroup
+        android:id="@+id/err_rdGroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_below="@+id/err_eg"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="30dp">
+        <RadioButton
+            android:id="@+id/err_rd1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tàu thuyền"
+            android:textColor="#111111"
+            android:textSize="15sp"/>
+        <RadioButton
+            android:id="@+id/err_rd2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Thiên nhiên"
+            android:textColor="#111111"
+            android:textSize="15sp"/>
+        <RadioButton
+            android:id="@+id/err_rd3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Phát triển"
+            android:textColor="#111111"
+            android:textSize="15sp"/>
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/err_result"
+        android:layout_marginLeft="30dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/err_rdGroup"/>
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true">
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content" />
+        <ImageView
+            android:id="@+id/err_pre"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="50dp"
+            android:src="@drawable/ic_pre"/>
+        <TextView
+            android:id="@+id/err_number"
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:text="Từ 01/05"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_height="wrap_content" />
+        <ImageView
+            android:id="@+id/err_next"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+
+            android:layout_height="50dp"
+            android:src="@drawable/ic_next"/>
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+</RelativeLayout>

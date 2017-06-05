@@ -6,26 +6,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="com.example.dongnd.screenenglish.ChoseImgGallery">
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:minHeight="?attr/actionBarSize"
-        android:background="?attr/colorPrimary"
+    <ImageView
+
+        android:id="@+id/gallery_background"
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        app:popupTheme="@style/AppTheme.PopupOverlay" >
-
-        <TextView
-            android:id="@+id/title"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="#ffffff"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:text="Image Gallery"
-            android:gravity="center"/>
-
-
-    </android.support.v7.widget.Toolbar>
+        android:layout_height="match_parent"
+        android:scaleType="fitXY"/>
 
     <GridView
         android:id="@+id/chose_img_gallery"

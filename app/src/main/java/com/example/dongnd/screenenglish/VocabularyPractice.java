@@ -53,7 +53,6 @@ public class VocabularyPractice extends AppCompatActivity {
                    Toast.makeText(getApplicationContext(), "Danh sách hiện tại trống", Toast.LENGTH_SHORT).show();
                }else{
                    Intent intent=new Intent(getApplicationContext(), VocabularyError.class);
-                   intent.putExtra("type","list_error");
                    startActivity(intent);
                }
 

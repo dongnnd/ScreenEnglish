@@ -153,8 +153,7 @@ public class VocabularyNewList extends AppCompatActivity {
     };
 
     public void startPractice(){
-        Intent intent=new Intent(getApplicationContext(), VocabularyError.class);
-        intent.putExtra("type", "newList");
+        Intent intent=new Intent(getApplicationContext(), VocabularyCureent.class);
         startActivity(intent);
     }
 

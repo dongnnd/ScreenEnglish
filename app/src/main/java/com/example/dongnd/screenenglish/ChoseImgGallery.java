@@ -4,8 +4,10 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.GridView;
+import android.widget.ImageView;
 
 import java.util.ArrayList;
 
@@ -17,11 +19,18 @@ public class ChoseImgGallery extends AppCompatActivity {
     GridView gridView;
     GalleryAdapter adapter;
     ArrayList<GalleryItem> arr;
+    ImageView background;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chose_img_gallery);
+
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
+        background=(ImageView)findViewById(R.id.gallery_background);
+        background.setImageResource(R.drawable.bg_demo);
 
         arr=getGalleryItem();
         gridView=(GridView)findViewById(R.id.chose_img_gallery);

@@ -97,7 +97,9 @@ public class Weather extends AppCompatActivity {
             }
         });
 
-        builder.show();
+        AlertDialog dialog=builder.create();
+        dialog.getWindow().setLayout(400, 400);
+        dialog.show();
     }
 
 }
