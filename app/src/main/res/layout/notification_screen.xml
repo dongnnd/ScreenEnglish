@@ -49,8 +49,7 @@
                     android:id="@+id/ns_img"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/ic_sunny"/>
+                    android:scaleType="fitXY" />
             </LinearLayout>
             <TextView
                 android:id="@+id/ns_update"

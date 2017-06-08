@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
     public TextView vc_caidat;
 
     // Khai báo view học ngữ pháp
-    public TextView gm_setting, gm_kichhoat, gm_practice;
+    public TextView gm_kichhoat, gm_practice;
     public ImageView gm_img;
 
 
@@ -65,9 +65,8 @@ public class MainActivity extends AppCompatActivity {
     public ImageView locksound_img;
 
     // Tùy chọn khóa màn hình
-    public TextView lock_kichhoat;
-    private AlertDialog alertDialog1;
-    private CharSequence[] values = {"Chọn đúng đáp án để mở khóa "," Bắt buộc nhập mã PIN để mở khóa"};
+    public TextView lock_kichhoat, lock_status;
+
 
     // Thời tiết
     private TextView weather_kichhoat;
@@ -158,6 +157,8 @@ public class MainActivity extends AppCompatActivity {
 
         boolean stateLockSound=sharedPreferences.getBoolean("stateLockSound", false);
 
+        String lockStatus=sharedPreferences.getString("stateUnlock", null);
+
         if (state) {
             se_img.setImageResource(R.drawable.switch_on);
         } else {
@@ -198,6 +199,12 @@ public class MainActivity extends AppCompatActivity {
             locksound_img.setImageResource(R.drawable.switch_on);
         }else{
             locksound_img.setImageResource(R.drawable.switch_off);
+        }
+
+        if(lockStatus.equals("state1")){
+            lock_status.setText("Chọn đáp án chính xác để mở khóa");
+        }else{
+            lock_status.setText("Bắt buộc nhập mã PIN để mở khóa");
         }
     }
 
@@ -327,8 +334,7 @@ public class MainActivity extends AppCompatActivity {
         gm_kichhoat=(TextView)findViewById(R.id.gm_kichhoat) ;
         gm_kichhoat.setOnClickListener(gmKichhoat);
         gm_img=(ImageView)findViewById(R.id.gm_img);
-        gm_setting=(TextView)findViewById(R.id.gm_setting);
-        gm_setting.setOnClickListener(gmSetting);
+
 
         gm_practice=(TextView)findViewById(R.id.gm_pratice);
         gm_practice.setOnClickListener(gmPractice);
@@ -346,6 +352,7 @@ public class MainActivity extends AppCompatActivity {
 
         lock_kichhoat=(TextView)findViewById(R.id.lock_kichhoat);
         lock_kichhoat.setOnClickListener(lockKichhoat);
+        lock_status=(TextView)findViewById(R.id.lock_status);
 
         weather_kichhoat=(TextView)findViewById(R.id.weather_kichhoat);
         weather_kichhoat.setOnClickListener(weather);
@@ -636,13 +643,7 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 
-    // Bắt sự kiện thiết lập grammar
-    public View.OnClickListener gmSetting=new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            startGrammar();
-        }
-    };
+
 
     public void startGrammar(){
         Intent intent=new Intent(this, GrammarSetting.class);
@@ -738,8 +739,8 @@ public class MainActivity extends AppCompatActivity {
         builder.setIcon(R.drawable.ic_select);
 
         List<LockItem> data=new ArrayList<>();
-        data.add(new LockItem(R.drawable.ic_lock_01, "Chọn đáp án chính xác để mở khóa"));
-        data.add(new LockItem(R.drawable.ic_lock_02, "Bắt buộc nhập mã PIN để mở khóa"));
+        data.add(new LockItem(0, "Chọn đáp án chính xác để mở khóa"));
+        data.add(new LockItem(0, "Bắt buộc nhập mã PIN để mở khóa"));
 
         LockAdapter adapter=new LockAdapter(this, R.layout.item_lock, data);
 
@@ -747,6 +748,15 @@ public class MainActivity extends AppCompatActivity {
         builder.setAdapter(adapter, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                if(which==0){
+                    editor.putString("stateUnlock","state1");
+                    lock_status.setText("Chọn đáp án chính xác để mở khóa");
+                }else{
+                    lock_status.setText("Bắt buộc nhập mã PIN để mở khóa");
+                    editor.putString("stateUnlock", "state2");
+                }
+
+                editor.commit();
 
             }
         });

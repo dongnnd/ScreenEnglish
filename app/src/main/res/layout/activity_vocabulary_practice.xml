@@ -5,24 +5,35 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.dongnd.screenenglish.VocabularyPractice">
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        app:popupTheme="@style/AppTheme.PopupOverlay">
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Vocabulary Practice"
+            android:textColor="#ffffff"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+
+    </android.support.v7.widget.Toolbar>
 
     <ImageView
         android:id="@+id/vp_title"
         android:layout_width="match_parent"
         android:layout_height="200dp"
+        android:layout_below="@id/toolbar"
         android:layout_margin="16dp"
         android:src="@drawable/vc_title"/>
 
-    <TextView
-        android:id="@+id/vp_text"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="30dp"
-        android:textSize="15sp"
-        android:textStyle="italic"
-        android:layout_marginRight="30dp"
-        android:layout_marginTop="16dp"
-        android:layout_below="@+id/vp_chose_list"/>
+
 
     <Button
         android:id="@+id/vp_error_list"

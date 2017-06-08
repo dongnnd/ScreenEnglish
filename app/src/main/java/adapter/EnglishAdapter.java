@@ -10,6 +10,7 @@ import android.hardware.Camera;
 import android.media.MediaPlayer;
 
 import android.net.wifi.WifiManager;
+import android.os.Vibrator;
 import android.provider.AlarmClock;
 import android.provider.CalendarContract;
 import android.provider.Settings;
@@ -90,6 +91,9 @@ public class EnglishAdapter extends android.support.v4.view.PagerAdapter{
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
 
+    // Khai bao rung
+    Vibrator vibrator;
+
     public EnglishAdapter(Activity context){
         this.context=context;
         englishAdapter=this;
@@ -100,6 +104,8 @@ public class EnglishAdapter extends android.support.v4.view.PagerAdapter{
 
         sharedPreferences=context.getSharedPreferences("data", Context.MODE_PRIVATE);
         editor=sharedPreferences.edit();
+
+        vibrator= (Vibrator) this.context.getSystemService(Context.VIBRATOR_SERVICE);
     }
 
     public void getQuestion(){
@@ -191,9 +197,7 @@ public class EnglishAdapter extends android.support.v4.view.PagerAdapter{
         eq_word=(TextView)view.findViewById(R.id.eq_word);
 
         eq_eg=(TextView)view.findViewById(R.id.eq_eg);
-        if(getEg(db.getStatement(id_question),question)!=""){
-            eq_eg.setText(Html.fromHtml(getEg("Eg: "+db.getStatement(id_question),question)));
-        }
+
 
 
         eq_btn1=(Button)view.findViewById(R.id.eq_btn1);
@@ -209,6 +213,10 @@ public class EnglishAdapter extends android.support.v4.view.PagerAdapter{
             eq_speak=(ImageView)view.findViewById(R.id.eq_speak);
             eq_speak.setImageResource(R.drawable.speaker);
             eq_speak.setOnClickListener(speak);
+
+            if(getEg(db.getStatement(id_question),question)!=""){
+                eq_eg.setText(Html.fromHtml(getEg("Eg: "+db.getStatement(id_question),question)));
+            }
         }
         if(question.length()>15){
             eq_word.setTextSize(18);
@@ -221,6 +229,11 @@ public class EnglishAdapter extends android.support.v4.view.PagerAdapter{
         if(spelling!=null){
             eq_spelling=(TextView)view.findViewById(R.id.eq_spelling);
             eq_spelling.setText(spelling);
+        }else{
+            eq_spelling=(TextView)view.findViewById(R.id.eq_spelling);
+            eq_spelling.setTextSize(18);
+            eq_spelling.setText(question);
+            eq_word.setText("");
         }
 
         getRandom(1,3);
@@ -364,7 +377,17 @@ public class EnglishAdapter extends android.support.v4.view.PagerAdapter{
                         unlockVcLap2();
                     }
                 }
-                context.finish();
+
+                if(sharedPreferences.getString("stateUnlock", null).equals("state1")){
+                    context.finish();
+                }else{
+                    if(sharedPreferences.getBoolean("stateLockSound", false)){
+                        MediaPlayer player=MediaPlayer.create(context, R.raw.tr_answer);
+                        player.start();
+                    }
+                    lockScreenActivity.loadPassSetting();
+                }
+
             }else{
                 if(sharedPreferences.getString("lap", null).equals("lap1")){
                     lockVcLap1();
@@ -398,6 +421,10 @@ public class EnglishAdapter extends android.support.v4.view.PagerAdapter{
                 editor.commit();
             }
         }
+        if(sharedPreferences.getBoolean("stateLockSound", false)){
+            MediaPlayer player=MediaPlayer.create(context, R.raw.unlock);
+            player.start();
+        }
     }
 
     public void unlockVcLap2(){
@@ -417,6 +444,11 @@ public class EnglishAdapter extends android.support.v4.view.PagerAdapter{
             Log.d("tag", subjectId);
             editor.putString(subjectselect, subjectId);
             editor.commit();
+
+            if(sharedPreferences.getBoolean("stateLockSound", false)){
+                MediaPlayer player=MediaPlayer.create(context, R.raw.unlock);
+                player.start();
+            }
         }
     }
 
@@ -439,6 +471,9 @@ public class EnglishAdapter extends android.support.v4.view.PagerAdapter{
                 addListError(id_question);
             }
         }
+        if(sharedPreferences.getBoolean("stateVibration", false)){
+            vibrator.vibrate(800);
+        }
     }
 
     public void lockVcLap2(){
@@ -455,6 +490,9 @@ public class EnglishAdapter extends android.support.v4.view.PagerAdapter{
             editor.putString(subjectselect, subjectId);
             editor.commit();
             addListError(id_question);
+        }
+        if(sharedPreferences.getBoolean("stateVibration", false)){
+            vibrator.vibrate(800);
         }
 
     }

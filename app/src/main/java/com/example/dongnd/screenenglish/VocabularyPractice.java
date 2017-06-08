@@ -11,9 +11,7 @@ import android.widget.Toast;
 
 public class VocabularyPractice extends AppCompatActivity {
 
-    private TextView vp_text;
-    private String title="(Bạn có thể học các từ vựng đã chọn sai trên màn hình khóa hoặc tạo mới " +
-            "từ danh sách bằng cách chọn chức năng tương ứng)";
+
 
     private Button vp_chose, vp_error, vp_remind;
     private SharedPreferences sharedPreferences;
@@ -29,8 +27,6 @@ public class VocabularyPractice extends AppCompatActivity {
     }
 
     public void init(){
-        vp_text=(TextView)findViewById(R.id.vp_text);
-        vp_text.setText(title);
 
         vp_chose=(Button)findViewById(R.id.vp_chose_list);
         vp_chose.setOnClickListener(vpClick);

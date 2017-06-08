@@ -13,27 +13,29 @@
         android:scaleType="fitXY"/>
 
 
+
     <RelativeLayout
-        android:id="@+id/err_rl_01"
+        android:id="@+id/err_rl_02"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
         <ImageView
-            android:id="@+id/err_tile_img"
-            android:layout_width="100dp"
+            android:id="@+id/err_dic_img"
+            android:layout_width="120dp"
             android:layout_height="80dp"
             android:src="@drawable/ic_tile"/>
         <TextView
-            android:id="@+id/err_tile"
+            android:id="@+id/err_dic"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/err_tile_img"
-            android:layout_alignTop="@+id/err_tile_img"
-            android:layout_alignRight="@+id/err_tile_img"
-            android:layout_alignBottom="@+id/err_tile_img"
+            android:layout_alignLeft="@+id/err_dic_img"
+            android:layout_alignTop="@+id/err_dic_img"
+            android:layout_alignRight="@+id/err_dic_img"
+            android:layout_alignBottom="@+id/err_dic_img"
             android:layout_margin="1dp"
+            android:textStyle="bold"
             android:textColor="#ffffff"
             android:gravity="center"
-            android:text="Tỉ lệ: 30%"/>
+            android:text="EEDic"/>
     </RelativeLayout>
 
     <TextView
@@ -43,10 +45,9 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="16dp"
         android:textSize="30sp"
-        android:layout_below="@+id/err_rl_01"
+        android:layout_below="@+id/err_rl_02"
         android:textStyle="bold"
-        android:textColor="#111111"
-        android:text="Nature"/>
+        android:textColor="#111111" />
     <TextView
         android:id="@+id/err_spelling"
         android:layout_width="wrap_content"
@@ -73,19 +74,15 @@
         android:layout_centerHorizontal="true"
         android:layout_below="@+id/err_spelling"
         android:src="@drawable/demo3"/>
-    <ImageView
-        android:id="@+id/err_eedic"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_eedic"
-        android:layout_centerVertical="true"
-        android:layout_alignParentRight="true"/>
+
     <TextView
         android:id="@+id/err_eg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/err_img"
         android:layout_marginTop="5dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
         android:textSize="18sp"
         android:layout_centerHorizontal="true"
         android:textColor="#111111"

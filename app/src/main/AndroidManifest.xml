@@ -145,7 +145,8 @@
 
         <activity
             android:name=".VocabularyPractice"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity
             android:name=".VocabularyError"
             android:screenOrientation="portrait"

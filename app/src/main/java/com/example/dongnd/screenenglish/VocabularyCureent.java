@@ -150,8 +150,6 @@ public class VocabularyCureent extends AppCompatActivity {
         err_speaker=(ImageView)findViewById(R.id.err_speaker);
         err_speaker.setOnClickListener(speaker);
 
-        err_eedic=(ImageView)findViewById(R.id.err_eedic);
-        err_eedic.setOnClickListener(eedic);
 
         err_pre=(ImageView) findViewById(R.id.err_pre);
         err_pre.setEnabled(false);
@@ -171,7 +169,7 @@ public class VocabularyCureent extends AppCompatActivity {
             Bitmap bm = BitmapFactory.decodeByteArray(listError.get(0).getImg(), 0, listError.get(0).getImg().length);
             err_img.setImageBitmap(bm);
         }else{
-
+            err_img.setImageResource(R.drawable.aa);
         }
 
         err_eg.setText("Eg: "+db.getStatement(listError.get(0).getId()));
@@ -257,7 +255,7 @@ public class VocabularyCureent extends AppCompatActivity {
             Bitmap bm = BitmapFactory.decodeByteArray(item.getImg(), 0, item.getImg().length);
             err_img.setImageBitmap(bm);
         }else{
-            err_img.setImageBitmap(null);
+            err_img.setImageResource(R.drawable.aa);
         }
 
         radomAnswer(item.getTr_mean(), item.getErr1_mean(), item.getErr2_mean());
@@ -290,7 +288,13 @@ public class VocabularyCureent extends AppCompatActivity {
             enableRadio();
         }
 
-        err_eg.setText("Eg: "+db.getStatement(item.getId()));
+        if(db.getStatement(item.getId()).length()>70){
+            err_eg.setTextSize(15);
+            err_eg.setText("Eg: "+db.getStatement(item.getId()));
+        }else{
+            err_eg.setText("Eg: "+db.getStatement(item.getId()));
+        }
+
 
     }
 

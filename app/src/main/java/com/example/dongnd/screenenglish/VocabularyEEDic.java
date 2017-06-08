@@ -6,8 +6,10 @@ import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.webkit.WebView;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import adapter.CurrentVocabulary;
 import adapter.OnSwipeTouchListener;
 import databases.DbAdapter;
 
@@ -15,6 +17,7 @@ public class VocabularyEEDic extends AppCompatActivity{
 
     private WebView eedic_web;
     private DbAdapter db;
+    private TextView ex_word, ex_spelling;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +29,14 @@ public class VocabularyEEDic extends AppCompatActivity{
         db=new DbAdapter(this);
         Bundle bundle=getIntent().getExtras();
         int id=bundle.getInt("id");
+
+        ex_word=(TextView)findViewById(R.id.ex_word);
+        ex_spelling=(TextView)findViewById(R.id.ex_spelling);
+
+        CurrentVocabulary vc=db.getItemError(id);
+        String spelling = "BrE " + vc.getSpellingaa() + " ;" + " NAmE " + vc.getSpellingam();
+        ex_word.setText(vc.getWord());
+        ex_spelling.setText(spelling);
 
         Log.d("tag", "A"+id);
         String eedic=db.getEEMean(id);

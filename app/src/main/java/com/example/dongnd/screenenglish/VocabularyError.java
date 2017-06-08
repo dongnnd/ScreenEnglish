@@ -45,7 +45,7 @@ public class VocabularyError extends AppCompatActivity {
     private List<CurrentVocabulary> listError=new ArrayList<>();
     private DbAdapter db;
 
-    private TextView err_question, err_spelling, err_eg, err_result, err_tile;
+    private TextView err_question, err_spelling, err_eg, err_result, err_tile, err_number, err_dic;
     private RadioGroup err_rdGroup;
     private RadioButton err_rd1, err_rd2, err_rd3;
     private ImageView err_img, err_background, err_speaker, err_eedic;
@@ -91,15 +91,9 @@ public class VocabularyError extends AppCompatActivity {
                 err_background.setImageResource(Integer.parseInt(strBackground));
             }
         }
-
-
-
     }
 
     public void getData(){
-
-
-
             strList=sharedPreferences.getString("list_error", null);
 
 
@@ -154,12 +148,16 @@ public class VocabularyError extends AppCompatActivity {
         err_speaker=(ImageView)findViewById(R.id.err_speaker);
         err_speaker.setOnClickListener(speaker);
 
-        err_eedic=(ImageView)findViewById(R.id.err_eedic);
-        err_eedic.setOnClickListener(eedic);
 
         err_pre=(ImageView) findViewById(R.id.err_pre);
         err_pre.setEnabled(false);
         err_pre.setOnClickListener(errPre);
+
+        err_number=(TextView)findViewById(R.id.err_number);
+
+        err_dic=(TextView)findViewById(R.id.err_dic);
+        err_dic.setOnClickListener(eedic);
+
     }
 
     public void loadFist(){
@@ -179,6 +177,7 @@ public class VocabularyError extends AppCompatActivity {
         }
 
         err_eg.setText("Eg: "+db.getStatement(listError.get(0).getId()));
+        err_number.setText("Từ số: 1/"+arrList.length);
     }
 
 
@@ -198,6 +197,8 @@ public class VocabularyError extends AppCompatActivity {
             }
             CurrentVocabulary vi=listError.get(current);
             loadState(vi);
+
+            err_number.setText("Từ số: "+(current+1)+"/"+arrList.length);
         }
     };
 
@@ -226,6 +227,7 @@ public class VocabularyError extends AppCompatActivity {
             }
             CurrentVocabulary vi=listError.get(current);
             loadState(vi);
+            err_number.setText("Từ số: "+(current+1)+"/"+arrList.length);
         }
     };
 

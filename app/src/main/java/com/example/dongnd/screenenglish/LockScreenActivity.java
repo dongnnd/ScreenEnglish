@@ -67,7 +67,6 @@ public class LockScreenActivity extends Activity {
     public WindowManager wm;
     public View myView;
     public MultiDirectionSlidingDrawer drawer;
-    TextView textView;
 
     public DbAdapter dbAdapter;
     public Vocabulary vc = null;
@@ -86,7 +85,7 @@ public class LockScreenActivity extends Activity {
 
     Battery battery;
     ImageView img_singal_1, img_singal_2, img_singal_3, img_singal_4, img_singal_5;
-    ImageView img_battery, background, background_demo;
+    ImageView img_battery, background;
     TextView text_singal, text_battery;
 
     public PagerAdapter adapter;
@@ -106,21 +105,13 @@ public class LockScreenActivity extends Activity {
 
     public boolean allowNotifi=false;
 
-    public LocationManager locationManager;
-    public String provider;
     public static double lat, lon;
     public OpenWeather openWeather;
-    public String wt_city="A";
+    public String wt_city;
     public String wt_date;
     public String wt_celsius;
     public String wt_description;
     public String wt_icon;
-    private static final long MIN_DISTANCE_CHANGE_FOR_UPDATES = 10;
-    private static final long MIN_TIME_BW_UPDATES = 1000 * 60 * 1;
-    private boolean isNetworkEnable=false;
-    private boolean isGpsEnable=false;
-    private Bitmap weather;
-
 
 
     @Override
